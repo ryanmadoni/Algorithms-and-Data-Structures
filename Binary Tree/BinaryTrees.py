@@ -1,3 +1,9 @@
+"""
+Author: Ryan Adoni
+Date: 8/20/2021
+Description: Practice with binary trees and binary search trees 
+"""
+
 from itertools import groupby, chain
 
 class BinaryTree:
@@ -104,14 +110,39 @@ class BinaryTree:
         Takes as input self, then returns a list of lists representing all possible simple paths from the root
         to every leaf in self.
         """
-        pass
+
+        def helper(binaryTree, path):
+            """
+            A helper to help find all the paths from the root to every leaf in binaryTree.
+            """
+        
+            # Check if the current node is a leaf, i.e., both its left and right branches are None
+            if binaryTree.l == None and binaryTree.r == None:
+                return [path + [binaryTree.data]] # return the path since a leaf has been reached
+
+            # Recurse to return the paths on the left and right subtrees of binaryTree
+            return (helper(binaryTree.l, path + [binaryTree.data]) if binaryTree.l != None else []) + \
+                   (helper(binaryTree.r, path + [binaryTree.data]) if binaryTree.r != None else [])
+        
+        return helper(self, []) # call the helper to execute the work and get all possible simple paths from the root to every leaf in self.
 
     def pathSum(self, n):
         """
-        Takes as input self and an integer n, then returns a list representing the simple path-if one exists 
-        in self-such that the path's sum is equal to n.  returns an empty list, [], if the sum cannot be made.
+        Takes as input self and an integer n, then returns a list representing the first simple path-if one exists 
+        in self such that the path's sum is equal to n.  returns an empty list, [], if the sum cannot be made.
         """
-        pass
+
+        # try to execute the following line of code, which can raise a ValueError if n is not in the 
+        # call to paths(), paths
+        try: 
+
+            # return paths indexed at the index of n if n is in the list where paths 
+            # is mapped to the sum function
+            return (paths := self.paths())[list(map(sum, paths)).index(n)] 
+
+        # catch the ValueError
+        except ValueError:
+            return [] # return [] since the call to index() returned a ValueError
 
     def contains(self, subtree):
         """
@@ -260,6 +291,8 @@ if __name__ == "__main__":
     # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
     # print(binaryTree1.numberOfNodes()) # print the number of nodes in binaryTree1
     # print(binaryTree1.numberOfInternalNodes()) # print the number of internal nodes in binaryTree1
+    # print(binaryTree1.paths()) # print the paths of the binary tree, binaryTree1
+    # print(binaryTree1.pathSum(6)) # print the first path that has the sum 6 in the binary tree, binaryTree1 
 
 
     
