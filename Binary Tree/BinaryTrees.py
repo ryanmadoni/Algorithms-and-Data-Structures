@@ -63,6 +63,18 @@ class BinaryTree:
         # Invert/Mirror each subtree recursively if the left and right subtrees are not None, i.e., they are not leaves.
         return BinaryTree(self.data, self.r.inverse() if self.r != None else None, self.l.inverse() if self.l != None else None)
 
+    def numberOfLeaves(self):
+        """
+        Takes as input self, then return the number of leaves in the binary tree, self
+        """
+
+        # check if the current node is a leaf, i.e., both its left and right branches are None
+        if self.l == None and self.r == None:
+            return 1 # return 1 since a leaf has been found
+
+        # return the number of leaves on the left and right branches of self if they are not None
+        return (self.l.numberOfLeaves() if self.l != None else 0) + (self.r.numberOfLeaves() if self.r != None else 0)
+
     def binaryTreeString(self, level = 0):
         """
         A function that takes as input a default value, level, that is used to space the string representation
@@ -97,5 +109,6 @@ if __name__ == "__main__":
     # print(binaryTree1.levelOrder()) # print the level order traversal of the binary tree, binaryTree1
     # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
     # print(binaryTree1 == binaryTree2)
+    print(binaryTree1.numberOfLeaves())
 
     
