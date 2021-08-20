@@ -63,17 +63,41 @@ class BinaryTree:
         # Invert/Mirror each subtree recursively if the left and right subtrees are not None, i.e., they are not leaves.
         return BinaryTree(self.data, self.r.inverse() if self.r != None else None, self.l.inverse() if self.l != None else None)
 
+    def numberOfNodes(self):
+        """
+        Takes as input self, then returns the number of nodes in the binary tree, self
+        """
+
+        # Check if the current node is a leaf, i.e., both its left and right branches are None
+        if self.l == None and self.r == None:
+            return 1 # Return 1 since a leaf has been found
+        
+        # Return the number of nodes on the left and right branches of self if they are not None 
+        # and add 1 to count the current node
+        return (self.l.numberOfNodes() if self.l != None else 0) + (self.r.numberOfNodes() if self.r != None else 0) + 1
+
     def numberOfLeaves(self):
         """
-        Takes as input self, then return the number of leaves in the binary tree, self
+        Takes as input self, then returns the number of leaves in the binary tree, self
         """
 
-        # check if the current node is a leaf, i.e., both its left and right branches are None
+        # Check if the current node is a leaf, i.e., both its left and right branches are None
         if self.l == None and self.r == None:
-            return 1 # return 1 since a leaf has been found
+            return 1 # Return 1 since a leaf has been found
 
-        # return the number of leaves on the left and right branches of self if they are not None
+        # Return the number of leaves on the left and right branches of self if they are not None
         return (self.l.numberOfLeaves() if self.l != None else 0) + (self.r.numberOfLeaves() if self.r != None else 0)
+    
+    def numberOfInternalNodes(self):
+        """
+        Takes as input self, then returns the number of internal nodes in the binary tree, self
+        """
+
+        # Returns the number of internal nodes, i.e., the number of total nodes minus the number of leaves.
+        # This can also be done without these helper functions by mimicking the format of the two functions
+        # numberOfNodes() and numberOfLeaves(), but returning 0 when the base case is reached, i.e., a leaf is 
+        # reached.
+        return self.numberOfNodes() - self.numberOfLeaves() 
 
     def binaryTreeString(self, level = 0):
         """
@@ -100,7 +124,7 @@ class BinaryTree:
 if __name__ == "__main__":
 
     binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4)) # define a binary tree, binaryTree1 to test the functions above
-    binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2 to test the functions above
+    binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
 
     print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
@@ -108,7 +132,9 @@ if __name__ == "__main__":
     # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.levelOrder()) # print the level order traversal of the binary tree, binaryTree1
     # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
-    # print(binaryTree1 == binaryTree2)
-    print(binaryTree1.numberOfLeaves())
+    # print(binaryTree1 == binaryTree2) # print if binaryTree1 and binaryTree2 are equal
+    # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
+    # print(binaryTree1.numberOfNodes()) # print the number of nodes in binaryTree1
+    # print(binaryTree1.numberOfInternalNodes()) # print the number of internal nodes in binaryTree1
 
     
