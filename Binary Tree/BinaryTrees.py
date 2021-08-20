@@ -74,14 +74,28 @@ class BinaryTree:
         # to format the string, then recurse to print the left and right binary subtrees.
         return str(self.data) + (spacing := "\n" + (level + 1) * "  ") + (self.l.binaryTreeString(level + 1) if self.l != None else "None") + spacing + (self.r.binaryTreeString(level + 1) if self.r != None else "None")
 
+    def __eq__(self, obj):
+        """
+        An overriden version of the object's equal method.  This function returns True if self and obj represent
+        the same binary tree and return False otherwise.
+        """
+
+        # Check if obj is a BinaryTree and if they have the same preorder traversal, i.e., 
+        # they represent the same binary tree.   A preorder traversal is arbitrarily used
+        # here, but it could be any traversal: preorder, inorder, or postorder
+        return isinstance(obj, BinaryTree) and self.preOrder() == obj.preOrder() 
+
 if __name__ == "__main__":
 
-    binaryTree = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4)) # define a binary tree, binaryTree to test the functions above
+    binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4)) # define a binary tree, binaryTree1 to test the functions above
+    binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2 to test the functions above
 
-    print(binaryTree.binaryTreeString()) # print the binary tree, binaryTree
-    # print(binaryTree.preOrder()) # print the preorder traversal of the binary tree, binaryTree
-    # print(binaryTree.inOrder()) # print the inorder traversal of the binary tree, binaryTree
-    # print(binaryTree.postOrder()) # print the postorder traversal of the binary tree, binaryTree
-    # print(binaryTree.levelOrder()) # print the level order traversal of the binary tree, binaryTree
-    # print(binaryTree.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree
+    print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
+    # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
+    # print(binaryTree1.inOrder()) # print the inorder traversal of the binary tree, binaryTree1
+    # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
+    # print(binaryTree1.levelOrder()) # print the level order traversal of the binary tree, binaryTree1
+    # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
+    # print(binaryTree1 == binaryTree2)
+
     
