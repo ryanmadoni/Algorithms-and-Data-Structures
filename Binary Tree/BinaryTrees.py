@@ -1,6 +1,5 @@
 from itertools import groupby, chain
 
-
 class BinaryTree:
     """
     A class to represent a binary tree and functions that can be applied to them.
@@ -53,8 +52,16 @@ class BinaryTree:
         # Use itertools.groupby to group the preorder traversal obtained from the helper to group each level,
         # then trim the level metadata and chain the final list of lists.  This is an extremely Pythonic way of
         # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
-        # but it could be an traversal: preorder, inorder, or postorder
+        # but it could be any traversal: preorder, inorder, or postorder
         return list(chain.from_iterable([[pair[1] for pair in group] for _, group in groupby(sorted(helper(self, 0)))]))
+
+    def inverse(self):
+        """
+        Takes as input self, then returns the inverse or mirror of the binary tree, self
+        """
+
+        # Invert/Mirror each subtree recursively if the left and right subtrees are not None, i.e., they are not leaves.
+        return BinaryTree(self.data, self.r.inverse() if self.r != None else None, self.l.inverse() if self.l != None else None)
 
     def binaryTreeString(self, level = 0):
         """
@@ -76,4 +83,5 @@ if __name__ == "__main__":
     # print(binaryTree.inOrder()) # print the inorder traversal of the binary tree, binaryTree
     # print(binaryTree.postOrder()) # print the postorder traversal of the binary tree, binaryTree
     # print(binaryTree.levelOrder()) # print the level order traversal of the binary tree, binaryTree
+    # print(binaryTree.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree
     
