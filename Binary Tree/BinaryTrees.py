@@ -99,6 +99,130 @@ class BinaryTree:
         # reached.
         return self.numberOfNodes() - self.numberOfLeaves() 
 
+    def paths(self):
+        """
+        Takes as input self, then returns a list of lists representing all possible simple paths from the root
+        to every leaf in self.
+        """
+        pass
+
+    def pathSum(self, n):
+        """
+        Takes as input self and an integer n, then returns a list representing the simple path-if one exists 
+        in self-such that the path's sum is equal to n.  returns an empty list, [], if the sum cannot be made.
+        """
+        pass
+
+    def contains(self, subtree):
+        """
+        Takes as input self and a BinaryTree, subtree, then returns a boolean value denoting if the subtree, 
+        subtree, is contained in the binary tree, self.  Returns True if subtree is contained and False otherwise.
+        """
+        pass
+
+    def height(self):
+        """
+        Takes as input self and returns the height, or maximum depth, of the binary tree, self.  Height can be
+        defined as either the number of nodes or number of connections between nodes.  This function will measure
+        height in nodes.
+        """
+        pass
+
+    def width(self, level):
+        """
+        Takes as input self and a non-negative integer, level, then returns the width of the level, level, in the
+        binary tree, self.  The width of a level in a binary tree is the number of nodes in a certain level.
+        """
+        pass
+
+    def maxWidth(self):
+        """
+        Takes as input self, then returns the maximum width of the tree, self.
+        """
+        pass
+
+    def diameter(self):
+        """
+        Takes as input self, then returns the diameter of the binary tree, self.  The diameter of a binary tree is
+        defined as the number of nodes on the longest path between any two leaves in the binary tree.
+        """
+        pass
+
+    def isLeftSkewed(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is left skewed.  
+        Returns True if the binary tree, self, is left skewed and False otherwise.  A binary tree is left skewed
+        if every node has exactly one child and every node does not have right children.
+        """
+        pass
+
+    def isRightSkewed(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is right skewed.  
+        Returns True if the binary tree, self, is right skewed and False otherwise.  A binary tree is right skewed
+        if every node has exactly one child and every node does not have left children.
+        """
+        pass
+
+    def isDegenerate(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is degenerate.  
+        Returns True if the binary tree, self, is degenerate (a.k.a. pathological) and False otherwise.  
+        A binary tree is degenerate or pathological if every node has exactly one child, i.e., the binary tree
+        degenerates to a linked list.
+        """
+        pass
+
+    def isBalanced(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is balanced.
+        Returns True if the binary tree, self, is balanced and False otherwise.  A balanced binary tree is
+        a binary tree in which the heights of every left and right subtree can differ by at most 1.
+        """
+        pass  
+
+    def isFull(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is full.
+        Returns True if the binary tree, self, is full and False otherwise.  A full binary tree is a 
+        binary tree if every node has 0 or 2 children.
+        """
+        pass
+
+    def isComplete(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is complete.
+        Returns True if the binary tree, self, is complete and False otherwise.  A complete binary tree is
+        a binary tree in which all levels are completely filled except possibly the last level and the last 
+        level has all keys as left as possible.
+        """
+        pass
+
+    def isPerfect(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is perfect.
+        Returns True if the binary tree, self, is perfect and False otherwise.  A perfect binary tree is 
+        a binary tree in which all internal nodes have two children and all leaves are at same level.
+        """
+        pass
+
+    def isBinarySearchTree(self):
+        """
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is a binary 
+        search tree.  Returns True if the binary tree, self, is a binary search tree and False otherwise.
+        A binary search tree is a binary tree that fulfills the following invariant: every left nodes' value
+        is less than its parent's value and that every right nodes' value is greater than its parent's value.
+        """
+        pass
+
+    def convertToBinarySearchTree(self):
+        """
+        Takes as input self, then returns a BinaryTree that contains all the elements of self, but also
+        fulfills the invariants of a binary search tree: that every left nodes' value is less than its parent's
+        value and that every right nodes' value is greater than its parent's value.
+        """
+        pass
+
     def binaryTreeString(self, level = 0):
         """
         A function that takes as input a default value, level, that is used to space the string representation
@@ -136,5 +260,6 @@ if __name__ == "__main__":
     # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
     # print(binaryTree1.numberOfNodes()) # print the number of nodes in binaryTree1
     # print(binaryTree1.numberOfInternalNodes()) # print the number of internal nodes in binaryTree1
+
 
     
