@@ -59,7 +59,7 @@ class BinaryTree:
         # then trim the level metadata and chain the final list of lists.  This is an extremely Pythonic way of
         # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
         # but it could be any traversal: preorder, inorder, or postorder
-        return list(chain.from_iterable([[pair[1] for pair in group] for _, group in groupby(sorted(helper(self, 0)))]))
+        return list(chain.from_iterable([[pair[1] for pair in group] for _, group in groupby(sorted(helper(self, 0)), lambda p: p[0])]))
 
     def inverse(self):
         """
@@ -176,7 +176,19 @@ class BinaryTree:
         Takes as input self and a non-negative integer, level, then returns the width of the level, level, in the
         binary tree, self.  The width of a level in a binary tree is the number of nodes in a certain level.
         """
-        pass
+
+        def helper(binaryTree, level):
+            """
+            A helper function to help get the width of a specific level of self.  This function gets the preorder
+            traversal of self, but each node's value is put into a two-tuple pair with its current level.
+            """
+            return [(level, binaryTree.data)] + (helper(binaryTree.l, level + 1) if binaryTree.l != None else []) + (helper(binaryTree.r, level + 1) if binaryTree.r != None else []) 
+
+        # Use itertools.groupby to group the preorder traversal obtained from the helper to group each level,
+        # then get the length of the specific level if it exists.  This is an extremely Pythonic way of
+        # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
+        # but it could be any traversal: preorder, inorder, or postorder
+        return len(L[level]) if level < len((L := [list(group) for _ , group in groupby(sorted(helper(self, 0)), lambda p: p[0])])) else 0
 
     def maxWidth(self):
         """
@@ -307,5 +319,5 @@ if __name__ == "__main__":
     # print(binaryTree1.pathSum(6)) # print the first path that has the sum 6 in the binary tree, binaryTree1 
     # print(binaryTree1.height()) # print the height of the binary tree, binaryTree1
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-
+    # print(binaryTree1.width(1)) # get the width of binaryTree1's 1st level
     
