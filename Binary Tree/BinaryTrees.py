@@ -137,7 +137,7 @@ class BinaryTree:
         try: 
 
             # return paths indexed at the index of n if n is in the list where paths 
-            # is mapped to the sum function
+            # is mapped to the sum function.
             return (paths := self.paths())[list(map(sum, paths)).index(n)] 
 
         # catch the ValueError
@@ -149,7 +149,12 @@ class BinaryTree:
         Takes as input self and a BinaryTree, subtree, then returns a boolean value denoting if the subtree, 
         subtree, is contained in the binary tree, self.  Returns True if subtree is contained and False otherwise.
         """
-        pass
+
+        # Return whether the tree rooted as self is equal to subtree, then or that result with the recursion
+        # of the left and right branches of self if they are not None.
+        return self == subtree or \
+               (self.l.contains(subtree) if self.l != None else False) or \
+               (self.r.contains(subtree) if self.r != None else False)
 
     def height(self):
         """
@@ -157,7 +162,14 @@ class BinaryTree:
         defined as either the number of nodes or number of connections between nodes.  This function will measure
         height in nodes.
         """
-        pass
+
+        # Check if the current node is a leaf, i.e., both its left and right branches are None
+        if self.l == None and self.r == None:
+            return 1 # Return 1 since a leaf has been found
+
+        # Return the max of the number of leaves on the left and right branches of self if they are not None, i.e.,
+        # the height of the binary tree, self, then add one for the current node.
+        return max(self.l.height() if self.l != None else 0, self.r.height() if self.r != None else 0) + 1
 
     def width(self, level):
         """
@@ -293,6 +305,7 @@ if __name__ == "__main__":
     # print(binaryTree1.numberOfInternalNodes()) # print the number of internal nodes in binaryTree1
     # print(binaryTree1.paths()) # print the paths of the binary tree, binaryTree1
     # print(binaryTree1.pathSum(6)) # print the first path that has the sum 6 in the binary tree, binaryTree1 
-
+    # print(binaryTree1.height()) # print the height of the binary tree, binaryTree1
+    # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
 
     
