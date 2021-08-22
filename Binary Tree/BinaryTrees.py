@@ -96,7 +96,7 @@ class BinaryTree:
     
     def numberOfInternalNodes(self):
         """
-        Takes as input self, then returns the number of internal nodes in the binary tree, self
+        Takes as input self, then returns the number of internal nodes in the binary tree, self.
         """
 
         # Returns the number of internal nodes, i.e., the number of total nodes minus the number of leaves.
@@ -270,7 +270,12 @@ class BinaryTree:
         Returns True if the binary tree, self, is balanced and False otherwise.  A balanced binary tree is
         a binary tree in which the heights of every left and right subtree can differ by at most 1.
         """
-        pass  
+
+        # Return whether the absolute difference of the binary tree's left and right subtrees' heights is less 
+        # than one and whether the left and right subtrees of the binary tree, self, are balanced if they exist.
+        return abs((self.l.height() if self.l != None else 0) - (self.r.height() if self.r != None else 0)) <= 1 and \
+               (self.l.isBalanced() if self.l != None else True) and \
+               (self.r.isBalanced() if self.r != None else True)
 
     def isFull(self):
         """
@@ -342,7 +347,7 @@ if __name__ == "__main__":
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
     binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
 
-    # print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
+    print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.inOrder()) # print the inorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
@@ -359,7 +364,8 @@ if __name__ == "__main__":
     # print(binaryTree1.width(1)) # get the width of binaryTree1's 1st level
     # print(binaryTree1.maxWidth()) # print the max width of the binary tree, binaryTree1
     # print(binaryTree1.diameter()) # print the diameter of the binary tree, binaryTree1
+    # print(binaryTree1.isBalanced()) # print a boolean denoting if the binary tree, binaryTree1 is balanced
 
-    print(binaryTree3.binaryTreeString()) # print the binary tree, binaryTree3
-    print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
-    
+    # print(binaryTree3.binaryTreeString()) # print the binary tree, binaryTree3
+    # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
+    # print(binaryTree3.isBalanced()) # print a boolean denoting if the binary tree, binaryTree3 is balanced
