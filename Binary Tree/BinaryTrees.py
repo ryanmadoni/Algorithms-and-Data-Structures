@@ -194,14 +194,27 @@ class BinaryTree:
         """
         Takes as input self, then returns the maximum width of the tree, self.
         """
-        pass
+        def helper(binaryTree, level):
+            """
+            A helper function to help get the max width of self.  This function gets the preorder
+            traversal of self, but each node's value is put into a two-tuple pair with its current level.
+            """
+            return [(level, binaryTree.data)] + (helper(binaryTree.l, level + 1) if binaryTree.l != None else []) + (helper(binaryTree.r, level + 1) if binaryTree.r != None else []) 
+
+        # Use itertools.groupby to group the preorder traversal obtained from the helper to group each level,
+        # then get the max width of the binary tree, self.  This is an extremely Pythonic way of
+        # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
+        # but it could be any traversal: preorder, inorder, or postorder
+        L = [len(list(group)) for _ , group in groupby(sorted(helper(self, 0)), lambda p: p[0])]
+        return L.index(max(L))
+
 
     def diameter(self):
         """
         Takes as input self, then returns the diameter of the binary tree, self.  The diameter of a binary tree is
         defined as the number of nodes on the longest path between any two leaves in the binary tree.
         """
-        pass
+        return self.l.height() + 1 + self.r.height() # Return the height of the left and right subtrees plus 1 for the current node.
 
     def isLeftSkewed(self):
         """
@@ -209,7 +222,12 @@ class BinaryTree:
         Returns True if the binary tree, self, is left skewed and False otherwise.  A binary tree is left skewed
         if every node has exactly one child and every node does not have right children.
         """
-        pass
+        
+        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+        if self.l == None and self.r == None:
+            return True # Return True since a leaf has been reached. 
+
+        return False if self.r != None else self.l.isLeftSkewed() # Return whether a left subtree of self is left skewed and self has no right children. 
 
     def isRightSkewed(self):
         """
@@ -217,7 +235,12 @@ class BinaryTree:
         Returns True if the binary tree, self, is right skewed and False otherwise.  A binary tree is right skewed
         if every node has exactly one child and every node does not have left children.
         """
-        pass
+        
+        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+        if self.l == None and self.r == None:
+            return True # Return True since a leaf has been reached. 
+
+        return False if self.l != None else self.r.isRightSkewed() # Return whether a right subtree of self is right skewed and self has no left children. 
 
     def isDegenerate(self):
         """
@@ -226,7 +249,20 @@ class BinaryTree:
         A binary tree is degenerate or pathological if every node has exactly one child, i.e., the binary tree
         degenerates to a linked list.
         """
-        pass
+        
+        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+        if self.l == None and self.r == None:
+            return True # Return True since a leaf has been reached.
+
+        # Check if the binary tree, self, only has one child, a left child.
+        if self.l != None and self.r == None:
+            return self.l.isDegenerate() # Recurse down the left branch of the binary tree, self.
+
+        # Check if the binary tree, self, only has one child, a right child.
+        if self.l == None and self.r != None:
+            return self.r.isDegenerate() # Recurse down the right branch of the binary tree, self.
+
+        return False # Return False because the binarr tree, self, has two children.
 
     def isBalanced(self):
         """
@@ -304,8 +340,9 @@ if __name__ == "__main__":
 
     binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4)) # define a binary tree, binaryTree1 to test the functions above
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
+    binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
 
-    print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
+    # print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.inOrder()) # print the inorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
@@ -320,4 +357,9 @@ if __name__ == "__main__":
     # print(binaryTree1.height()) # print the height of the binary tree, binaryTree1
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
     # print(binaryTree1.width(1)) # get the width of binaryTree1's 1st level
+    # print(binaryTree1.maxWidth()) # print the max width of the binary tree, binaryTree1
+    # print(binaryTree1.diameter()) # print the diameter of the binary tree, binaryTree1
+
+    print(binaryTree3.binaryTreeString()) # print the binary tree, binaryTree3
+    print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
     
