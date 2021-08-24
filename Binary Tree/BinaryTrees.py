@@ -5,6 +5,7 @@ Description: Practice with binary trees and binary search trees
 """
 
 from itertools import groupby, chain
+from operator import itemgetter
 
 class BinaryTree:
     """
@@ -188,7 +189,7 @@ class BinaryTree:
         # then get the length of the specific level if it exists.  This is an extremely Pythonic way of
         # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
         # but it could be any traversal: preorder, inorder, or postorder
-        return len(L[level]) if level < len((L := [list(group) for _ , group in groupby(sorted(helper(self, 0)), lambda p: p[0])])) else 0
+        return len(L[level]) if level < len((L := [list(group) for _, group in groupby(sorted(helper(self, 0)), lambda p: p[0])])) else 0
 
     def maxWidth(self):
         """
@@ -205,9 +206,7 @@ class BinaryTree:
         # then get the max width of the binary tree, self.  This is an extremely Pythonic way of
         # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
         # but it could be any traversal: preorder, inorder, or postorder
-        L = [len(list(group)) for _ , group in groupby(sorted(helper(self, 0)), lambda p: p[0])]
-        return L.index(max(L))
-
+        return max([len(list(group)) for _, group in groupby(sorted(helper(self, 0)), lambda p: p[0])])
 
     def diameter(self):
         """
@@ -294,6 +293,24 @@ class BinaryTree:
 
         return False # return False since the binary tree, self, has one child.
 
+    def level(self, level):
+        """
+        Takes as input self and a non-negative integer, then returns a list representing the corresponding level
+        in self.
+        """
+        def helper(binaryTree, level):
+            """
+            A helper function to help get the level of self.  This function gets the preorder
+            traversal of self, but each node's value is put into a two-tuple pair with its current level.
+            """
+            return [(level, binaryTree.data)] + (helper(binaryTree.l, level + 1) if binaryTree.l != None else [(level + 1, None)]) + (helper(binaryTree.r, level + 1) if binaryTree.r != None else [(level + 1, None)]) 
+
+        # Use itertools.groupby to group the preorder traversal obtained from the helper to group each level,
+        # then get the level desired if that level exists.  This is an extremely Pythonic way of
+        # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
+        # but it could be any traversal: preorder, inorder, or postorder
+        return [[pair[1] for pair in list(group)] for _, group in groupby(sorted(helper(self, 0), key = itemgetter(0)), lambda p: p[0])][level] if level < self.height() else []
+
     def isComplete(self):
         """
         Takes as input self, then returns a boolean value denoting if the binary tree, self, is complete.
@@ -301,7 +318,29 @@ class BinaryTree:
         a binary tree in which all levels are completely filled except possibly the last level and the last 
         level has all keys as left as possible.
         """
-        pass
+        level, complete = 0, True # Instantiate two variables: one to keep track of the current level and a boolean keeping track if the binary tree is complete.
+
+        # Loop until the call to level yields an empty list, [].
+        while (values := self.level(level)) != []:
+
+            # Check if None is in values.
+            if None in values:
+                found = False # Instantiate a boolean to see if a None has been found in the list, values.
+
+                # Loop for each value in values.
+                for value in values:
+
+                    # Check if a None has been found.
+                    if value == None:
+                        found = True # set the boolean, found, to True.
+
+                    # Check to see if a None has been found and a non None value is after it, i.e., the binary tree is incomplete.
+                    if found and value != None:
+                        complete = False # Set complete to False.
+        
+            level += 1 # increment the level.
+
+        return complete # Return a boolean denoting whether the binary tree, self is complete.
 
     def isPerfect(self):
         """
@@ -356,6 +395,7 @@ if __name__ == "__main__":
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
     binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
     binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
+    binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
 
     # print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
@@ -380,5 +420,9 @@ if __name__ == "__main__":
     # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
     # print(binaryTree3.isBalanced()) # print a boolean denoting if the binary tree, binaryTree3 is balanced
 
-    print(binaryTree4.binaryTreeString()) # print the binary tree, binaryTree4
-    print(binaryTree4.isFull()) # print a boolean denoting if the binary tree, binaryTree4 is full
+    # print(binaryTree4.binaryTreeString()) # print the binary tree, binaryTree4
+    # print(binaryTree4.isFull()) # print a boolean denoting if the binary tree, binaryTree4 is full
+
+    # print(binaryTree5.binaryTreeString()) # print the binary tree, binaryTree5
+    # print(binaryTree5.level(2)) # print level 2 of the binary tree, binaryTree5
+    # print(binaryTree5.isComplete()) # print a boolean denoting if the binary tree, binaryTree4 is complete
