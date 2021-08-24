@@ -283,7 +283,16 @@ class BinaryTree:
         Returns True if the binary tree, self, is full and False otherwise.  A full binary tree is a 
         binary tree if every node has 0 or 2 children.
         """
-        pass
+
+        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+        if self.l == None and self.r == None:
+            return True # Return True since a leaf has been reached.
+        
+        # Check if the current node has two children, i.e., both its left and right branches are not None.
+        if self.l != None and self.r != None:
+            return self.l.isFull() and self.r.isFull() # Return the recursion of the left and right subtrees.
+
+        return False # return False since the binary tree, self, has one child.
 
     def isComplete(self):
         """
@@ -346,8 +355,9 @@ if __name__ == "__main__":
     binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4)) # define a binary tree, binaryTree1 to test the functions above
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
     binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
+    binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
 
-    print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
+    # print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.inOrder()) # print the inorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
@@ -369,3 +379,6 @@ if __name__ == "__main__":
     # print(binaryTree3.binaryTreeString()) # print the binary tree, binaryTree3
     # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
     # print(binaryTree3.isBalanced()) # print a boolean denoting if the binary tree, binaryTree3 is balanced
+
+    print(binaryTree4.binaryTreeString()) # print the binary tree, binaryTree4
+    print(binaryTree4.isFull()) # print a boolean denoting if the binary tree, binaryTree4 is full
