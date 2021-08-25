@@ -348,24 +348,23 @@ class BinaryTree:
         Returns True if the binary tree, self, is perfect and False otherwise.  A perfect binary tree is 
         a binary tree in which all internal nodes have two children and all leaves are at same level.
         """
-        pass
+        return self.numberOfNodes() == 2 ** self.height() - 1 # Check if the number of nodes equals 2 ^ (height) - 1, i.e., the binary tree, self, is perfect.
 
     def isBinarySearchTree(self):
         """
         Takes as input self, then returns a boolean value denoting if the binary tree, self, is a binary 
         search tree.  Returns True if the binary tree, self, is a binary search tree and False otherwise.
         A binary search tree is a binary tree that fulfills the following invariant: every left nodes' value
-        is less than its parent's value and that every right nodes' value is greater than its parent's value.
+        and its childrens' values are less than its parent's value and every right nodes' value and its 
+        childrens' values are greater than its parent's value.
         """
-        pass
 
-    def convertToBinarySearchTree(self):
-        """
-        Takes as input self, then returns a BinaryTree that contains all the elements of self, but also
-        fulfills the invariants of a binary search tree: that every left nodes' value is less than its parent's
-        value and that every right nodes' value is greater than its parent's value.
-        """
-        pass
+        # Check if the binary search tree invariant is upheld and recurse to see if the children of self are 
+        # also binary search trees.
+        return (all([node < self.data for node in self.l.preOrder()]) if self.l != None else True) and \
+               (all([self.data < node for node in self.r.preOrder()]) if self.r != None else True) and \
+               (self.l.isBinarySearchTree() if self.l != None else True) and \
+               (self.r.isBinarySearchTree() if self.r != None else True)
 
     def binaryTreeString(self, level = 0):
         """
@@ -391,11 +390,12 @@ class BinaryTree:
 
 if __name__ == "__main__":
 
-    binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4)) # define a binary tree, binaryTree1 to test the functions above
+    binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the functions above
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
     binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
     binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
     binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
+    binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above
 
     # print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
@@ -415,6 +415,7 @@ if __name__ == "__main__":
     # print(binaryTree1.maxWidth()) # print the max width of the binary tree, binaryTree1
     # print(binaryTree1.diameter()) # print the diameter of the binary tree, binaryTree1
     # print(binaryTree1.isBalanced()) # print a boolean denoting if the binary tree, binaryTree1 is balanced
+    # print(binaryTree1.isPerfect()) # print a boolean denoting if the binary tree, binaryTree1 is perfect
 
     # print(binaryTree3.binaryTreeString()) # print the binary tree, binaryTree3
     # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
@@ -425,4 +426,6 @@ if __name__ == "__main__":
 
     # print(binaryTree5.binaryTreeString()) # print the binary tree, binaryTree5
     # print(binaryTree5.level(2)) # print level 2 of the binary tree, binaryTree5
-    # print(binaryTree5.isComplete()) # print a boolean denoting if the binary tree, binaryTree4 is complete
+    # print(binaryTree5.isComplete()) # print a boolean denoting if the binary tree, binaryTree4, is complete
+
+    # print(binaryTree6.isBinarySearchTree()) # print a boolean denoting if the binary tree, binaryTree6 is a binary search tree
