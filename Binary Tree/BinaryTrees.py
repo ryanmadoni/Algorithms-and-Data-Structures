@@ -448,7 +448,7 @@ class BinarySearchTree(BinaryTree):
         Override the inverse function since inverse cannot be applied to a binary search tree without breaking
         the binary search tree invariant.
         """
-        pass # Pass to remove functionality from teh parent class, BinaryTree.
+        pass # Pass to remove functionality from the parent class, BinaryTree.
 
 if __name__ == "__main__":
 
