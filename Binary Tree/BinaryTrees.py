@@ -388,7 +388,72 @@ class BinaryTree:
         # here, but it could be any traversal: preorder, inorder, or postorder
         return isinstance(obj, BinaryTree) and self.preOrder() == obj.preOrder() 
 
+class BinarySearchTree(BinaryTree):
+    """
+    A class to represent a binary search tree and functions that can be applied to them.  This class is a child
+    of the binary tree class, BinaryTree, above.  A binary search tree is a binary tree that fulfills the 
+    following invariant: every left nodes' value and its childrens' values are less than its parent's value 
+    and every right nodes' value and its childrens' values are greater than its parent's value.
+    """
+
+    def __init__(self, data):
+        """
+        The constructor for the BinarySearchTree class that represents a binary search tree.  Initializes the
+        root data to data.
+        """
+        super().__init__(data) # Call to super, i.e., parent's constructor, to initialize the root node to data.
+
+    def insert(self, data):
+        """
+        Takes as input self and an integer, data, then adds data to the binary search tree, self, maintaining the 
+        binary search tree invariant; if the value data is not already inside the binary search tree, self, then it
+        is added and True is returned; if the value is already inside the binary search tree, no value is added and
+        False is returned.
+        """
+        
+        # Check if the data is less than self's data.
+        if data < self.data:
+            
+            # Check if the left subtree of self is empty.
+            if self.l == None:
+                self.l = BinarySearchTree(data) # add a new subtree with the value data.
+                return True # return True since the value was added succesfully.
+
+            return self.l.insert(data) # Recurse down the left branch of the tree to add data to the binary search tree, self.
+
+        # Check if the data is greater than self's data.
+        if self.data < data:
+            
+            # Check if the rigth subtree of self is empty.
+            if self.r == None:
+                self.r = BinarySearchTree(data) # add a new subtree with the value data.
+                return True # return True since the value was added succesfully.
+                
+            return self.r.insert(data) # Recurse down the right branch of the tree to add data to the binary search tree, self.
+
+        return False # return False since data and self's data are equal.
+
+    def delete(self):
+        """
+        """
+        pass
+
+    def search(self):
+        """
+        """
+        pass
+
+    def inverse(self):
+        """
+        Override the inverse function since inverse cannot be applied to a binary search tree without breaking
+        the binary search tree invariant.
+        """
+        pass # Pass to remove functionality from teh parent class, BinaryTree.
+
 if __name__ == "__main__":
+
+    bst1 = BinarySearchTree(10)
+    print(bst1.binaryTreeString())
 
     binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the functions above
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
@@ -429,3 +494,5 @@ if __name__ == "__main__":
     # print(binaryTree5.isComplete()) # print a boolean denoting if the binary tree, binaryTree4, is complete
 
     # print(binaryTree6.isBinarySearchTree()) # print a boolean denoting if the binary tree, binaryTree6 is a binary search tree
+
+    
