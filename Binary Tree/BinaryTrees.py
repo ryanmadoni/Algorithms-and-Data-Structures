@@ -433,15 +433,25 @@ class BinarySearchTree(BinaryTree):
 
         return False # return False since data and self's data are equal.
 
-    def delete(self):
+    def delete(self, data):
         """
+        Takes as input self and an integer, data, then deletes data to the binary search tree, self, maintaining the 
+        binary search tree invariant; if the value data is inside the binary search tree, self, then it is 
+        deleted and True is returned; if the value is not inside the binary search tree, no value is deleted and
+        False is returned.
         """
         pass
 
-    def search(self):
+    def search(self, data):
         """
+        Takes as input self and an integer, data, then returns True if data is contained within the Binary Search
+        Tree, self; returns False otherwise.
         """
-        pass
+
+        # Check if self.data is equal to data, then recurse down the left and right subtrees if they are non None.
+        return self.data == data or \
+               (self.l.search(data) if self.l != None else False) or \
+               (self.r.search(data) if self.r != None else False)
 
     def inverse(self):
         """
@@ -453,7 +463,13 @@ class BinarySearchTree(BinaryTree):
 if __name__ == "__main__":
 
     bst1 = BinarySearchTree(10)
+    bst1.insert(5)
+    bst1.insert(6)
+    bst1.insert(2)
+    bst1.insert(11)
+    bst1.insert(15)
     print(bst1.binaryTreeString())
+
 
     binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the functions above
     binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
