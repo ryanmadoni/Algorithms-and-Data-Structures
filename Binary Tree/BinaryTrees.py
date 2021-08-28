@@ -433,14 +433,46 @@ class BinarySearchTree(BinaryTree):
 
         return False # return False since data and self's data are equal.
 
-    def delete(self, data):
+    def delete(self, data, parent, left):
         """
         Takes as input self and an integer, data, then deletes data to the binary search tree, self, maintaining the 
         binary search tree invariant; if the value data is inside the binary search tree, self, then it is 
         deleted and True is returned; if the value is not inside the binary search tree, no value is deleted and
         False is returned.
         """
-        pass
+
+        if self.data == data:
+            
+            if self.l != None and self.r != None:
+                self.data = min(self.r.preOrder())
+                return self.r.delete(self.data, self, False)
+
+            if self.l == None and self.r == None:
+                if left:
+                    parent.l = None
+                else:
+                    parent.r = None
+
+            elif self.l != None and self.r == None:
+                if left:
+                    parent.l = self.l
+                else:
+                    parent.r = self.l
+            
+            else:
+                if left:
+                    parent.l = self.r
+                else:
+                    parent.r = self.r
+
+            return True
+        
+        elif self.l != None and self.l.search(data):
+            return self.l.delete(data, self, True)
+        elif self.r != None and self.r.search(data):
+            return self.r.delete(data, self, False)
+        
+        return False 
 
     def search(self, data):
         """
@@ -466,8 +498,10 @@ if __name__ == "__main__":
     bst1.insert(5)
     bst1.insert(6)
     bst1.insert(2)
+    bst1.insert(13)
     bst1.insert(11)
-    bst1.insert(15)
+    print(bst1.binaryTreeString())
+    print(bst1.delete(5, None, None))
     print(bst1.binaryTreeString())
 
 
