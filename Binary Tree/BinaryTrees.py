@@ -549,16 +549,26 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree1.inOrder(), inOrder1) # Check if binaryTree1's call to the inOrder() function yields the correct output.
         self.assertEqual(self.binaryTree2.inOrder(), inOrder2) # Check if binaryTree2's call to the inOrder() function yields the correct output.
 
+    def testPostOrder(self):
+        """
+        A function to test the functionality of the class BinaryTree's postOrder()'s function.
+        """
+        postOrder1, postOrder2 = [1, 2, 2, 4, 3], [5, 9, 2, 2, 2, 3, 1] # The expected output of binaryTree1's and binaryTree2's calls to postOrder().
+
+        self.assertEqual(self.binaryTree1.postOrder(), postOrder1) # Check if binaryTree1's call to the postOrder() function yields the correct output.
+        self.assertEqual(self.binaryTree2.postOrder(), postOrder2) # Check if binaryTree2's call to the postOrder() function yields the correct output.
+
 
 if __name__ == "__main__":
     unittest.main()
+
+    # vvv Sloppy Testing (To be removed) vvv
 
     # binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
     # binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
     # binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
     # binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above
 
-    # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.levelOrder()) # print the level order traversal of the binary tree, binaryTree1
     # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
     # print(binaryTree1 == binaryTree2) # print if binaryTree1 and binaryTree2 are equal
