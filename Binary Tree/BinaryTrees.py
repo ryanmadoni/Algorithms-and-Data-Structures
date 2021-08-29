@@ -540,20 +540,24 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree1.preOrder(), preOrder1) # Check if binaryTree1's call to the preOrder() function yields the correct output.
         self.assertEqual(self.binaryTree2.preOrder(), preOrder2) # Check if binaryTree2's call to the preOrder() function yields the correct output.
 
+    def testInOrder(self):
+        """
+        A function to test the functionality of the class BinaryTree's inOrder()'s function.
+        """
+        inOrder1, inOrder2 = [1, 2, 3, 2, 4], [5, 2, 9, 1, 2, 2, 3] # The expected output of binaryTree1's and binaryTree2's calls to inOrder().
+
+        self.assertEqual(self.binaryTree1.inOrder(), inOrder1) # Check if binaryTree1's call to the inOrder() function yields the correct output.
+        self.assertEqual(self.binaryTree2.inOrder(), inOrder2) # Check if binaryTree2's call to the inOrder() function yields the correct output.
 
 
 if __name__ == "__main__":
     unittest.main()
 
-    # binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the functions above
-    # binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
     # binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
     # binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
     # binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
     # binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above
 
-    # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
-    # print(binaryTree1.inOrder()) # print the inorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.levelOrder()) # print the level order traversal of the binary tree, binaryTree1
     # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
