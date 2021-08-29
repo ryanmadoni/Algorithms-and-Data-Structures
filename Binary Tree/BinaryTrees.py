@@ -6,6 +6,7 @@ Description: Practice with binary trees and binary search trees
 
 from itertools import groupby, chain
 from operator import itemgetter
+import unittest
 
 class BinaryTree:
     """
@@ -505,27 +506,37 @@ class BinarySearchTree(BinaryTree):
         """
         pass # Pass to remove functionality from the parent class, BinaryTree.
 
+class TestBinaryTreeMethods(unittest.TestCase):
+    """
+    A class extending the unittest.TestCase class used to test the binary tree and binary search tree classes and 
+    their component functions above.
+    """
+    
+    def testBinaryTreeString(self):
+        """
+        A function to test the functionality of the class BinaryTree's binaryTreeString()'s function.
+        """
+        binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the binary tree functions.
+        binaryTree2 = BinaryTree(1, BinaryTree(2, BinaryTree(5), BinaryTree(9)), BinaryTree(3, BinaryTree(2, BinaryTree(2), None), None)) # define a binary tree, binaryTree2 to test the binary tree functions.
+
+        binaryTreeString1 = "3\n  2\n    1\n      None\n      None\n    None\n  4\n    2\n      None\n      None\n    None" # The expected output of binaryTree1's call to binaryTreeString().
+        binaryTreeString2 = "1\n  2\n    5\n      None\n      None\n    9\n      None\n      None\n  3\n    2\n      2\n        None\n        None\n      None\n    None" # The expected output of binaryTree2's call to binaryTreeString().
+
+        self.assertEqual(binaryTree1.binaryTreeString(), binaryTreeString1) # Check if binaryTree1's call to the binaryTreeString() function yields the correct output.
+        self.assertEqual(binaryTree2.binaryTreeString(), binaryTreeString2) # Check if binaryTree2's call to the binaryTreeString() function yields the correct output.
+
+
+
 if __name__ == "__main__":
+    unittest.main()
 
-    bst1 = BinarySearchTree(10)
-    bst1.insert(5)
-    bst1.insert(6)
-    bst1.insert(2)
-    bst1.insert(13)
-    bst1.insert(11)
-    print(bst1.binaryTreeString())
-    print(bst1.delete(6))
-    print(bst1.binaryTreeString())
+    # binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the functions above
+    # binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
+    # binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
+    # binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
+    # binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
+    # binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above
 
-
-    binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the functions above
-    binaryTree2 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree2, to test the functions above
-    binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
-    binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
-    binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
-    binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above
-
-    # print(binaryTree1.binaryTreeString()) # print the binary tree, binaryTree1
     # print(binaryTree1.preOrder()) # print the preorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.inOrder()) # print the inorder traversal of the binary tree, binaryTree1
     # print(binaryTree1.postOrder()) # print the postorder traversal of the binary tree, binaryTree1
@@ -545,14 +556,11 @@ if __name__ == "__main__":
     # print(binaryTree1.isBalanced()) # print a boolean denoting if the binary tree, binaryTree1 is balanced
     # print(binaryTree1.isPerfect()) # print a boolean denoting if the binary tree, binaryTree1 is perfect
 
-    # print(binaryTree3.binaryTreeString()) # print the binary tree, binaryTree3
     # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
     # print(binaryTree3.isBalanced()) # print a boolean denoting if the binary tree, binaryTree3 is balanced
 
-    # print(binaryTree4.binaryTreeString()) # print the binary tree, binaryTree4
     # print(binaryTree4.isFull()) # print a boolean denoting if the binary tree, binaryTree4 is full
-
-    # print(binaryTree5.binaryTreeString()) # print the binary tree, binaryTree5
+    
     # print(binaryTree5.level(2)) # print level 2 of the binary tree, binaryTree5
     # print(binaryTree5.isComplete()) # print a boolean denoting if the binary tree, binaryTree4, is complete
 
