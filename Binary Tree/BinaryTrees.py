@@ -440,40 +440,52 @@ class BinarySearchTree(BinaryTree):
         deleted and True is returned; if the value is not inside the binary search tree, no value is deleted and
         False is returned.
         """
-        
+
         def helper(self, data, parent, left):
             """
+            A helper function to aid in the deletion of data.  Takes in the same variables as the outer function
+            and additionally two other variables: parent, the parent node of self and left, a boolean denoting
+            if the child of parent, self, is the left child of parent.  If the value data is inside the binary 
+            search tree, self, then it is deleted and True is returned; if the value is not inside the binary 
+            search tree, no value is deleted and False is returned. 
             """
 
             # Check if the data of self is the data that needs to be deleted.
             if self.data == data:
                 
+                # Check if self has two children
                 if self.l != None and self.r != None:
-                    self.data = min(self.r.preOrder())
-                    return helper(self.r, self.data, self, False)
+                    self.data = min(self.r.preOrder()) # Set self's data to the smallest value in the right subtree of self (alternatively, this could have been the largest value in the left subtree).
+                    return helper(self.r, self.data, self, False) # Recurse to delete self.data in the right subtree to remove the duplicate value.
 
+                # Check if self is a leaf.
                 if self.l == None and self.r == None:
-                    if left: parent.l = None
-                    else: parent.r = None
+                    if left: parent.l = None # set the left child of parent to None if left is True.
+                    else: parent.r = None # set the right child of parent to None if left is False.
 
+                # Check if self has no right child and a has a left child.
                 elif self.l != None and self.r == None:
-                    if left: parent.l = self.l
-                    else: parent.r = self.l
+                    if left: parent.l = self.l # set the left child of parent to the left child of self if left is True.
+                    else: parent.r = self.l # set the right child of parent to the left child of self if left is False.
                 
+                # Else, self has no left child and a has a right child.
                 else:
-                    if left: parent.l = self.r
-                    else: parent.r = self.r
+                    if left: parent.l = self.r # set the left child of parent to the right child of self if left is True.
+                    else: parent.r = self.r # set the right child of parent to the right child of self if left is False.
 
-                return True
+                return True # Return True since a value has been deleted successfully.
             
+            # Check if data is in the left subtree of self.
             elif self.l != None and self.l.search(data):
-                return helper(self.l, data, self, True)
-            elif self.r != None and self.r.search(data):
-                return helper(self.r, data, self, False)
-            
-            return False 
+                return helper(self.l, data, self, True) # Recurse using the helper into the left subtree.
 
-        return helper(self, data, None, None)
+            # Check if data is in the right subtree of self.
+            elif self.r != None and self.r.search(data):
+                return helper(self.r, data, self, False) # Recurse using the helper into the right subtree.
+            
+            return False # Return False since data is not conatained in self.
+
+        return helper(self, data, None, None) # Call the helper function to execute the work and return its result.
 
     def search(self, data):
         """
