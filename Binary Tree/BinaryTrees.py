@@ -1,6 +1,6 @@
 """
 Author: Ryan Adoni
-Date: 8/20/2021
+Date: 8/29/2021
 Description: Practice with binary trees and binary search trees 
 """
 
@@ -61,7 +61,7 @@ class BinaryTree:
         # then trim the level metadata and chain the final list of lists.  This is an extremely Pythonic way of
         # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
         # but it could be any traversal: preorder, inorder, or postorder
-        return list(chain.from_iterable([[pair[1] for pair in group] for _, group in groupby(sorted(helper(self, 0)), lambda p: p[0])]))
+        return list(chain.from_iterable([[pair[1] for pair in group] for _, group in groupby(sorted(helper(self, 0), key = itemgetter(0)), lambda p: p[0])]))
 
     def inverse(self):
         """
@@ -520,6 +520,11 @@ class TestBinaryTreeMethods(unittest.TestCase):
         """
         self.binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the binary tree functions.
         self.binaryTree2 = BinaryTree(1, BinaryTree(2, BinaryTree(5), BinaryTree(9)), BinaryTree(3, BinaryTree(2, BinaryTree(2), None), None)) # define a binary tree, binaryTree2 to test the binary tree functions.
+        self.binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above.
+        self.binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above.
+        self.binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above.
+        self.binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above.
+        self.binaryTree7 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree7, to test the functions above.
 
     def testBinaryTreeString(self):
         """
@@ -558,18 +563,20 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree1.postOrder(), postOrder1) # Check if binaryTree1's call to the postOrder() function yields the correct output.
         self.assertEqual(self.binaryTree2.postOrder(), postOrder2) # Check if binaryTree2's call to the postOrder() function yields the correct output.
 
+    def testLevelOrder(self):
+        """
+        A function to test the functionality of the class BinaryTree's levelOrder()'s function.
+        """
+        levelOrder1, levelOrder2 = [3, 2, 4, 1, 2], [1, 2, 3, 5, 9, 2, 2] # The expected output of binaryTree1's and binaryTree2's calls to levelOrder().
+
+        self.assertEqual(self.binaryTree1.levelOrder(), levelOrder1) # Check if binaryTree1's call to the levelOrder() function yields the correct output.
+        self.assertEqual(self.binaryTree2.levelOrder(), levelOrder2) # Check if binaryTree2's call to the levelOrder() function yields the correct output.
 
 if __name__ == "__main__":
     unittest.main()
 
     # vvv Sloppy Testing (To be removed) vvv
 
-    # binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above
-    # binaryTree4 = BinaryTree(1, BinaryTree(2), BinaryTree(3, BinaryTree(4), BinaryTree(4))) # define a binary tree, binaryTree4, to test the functions above
-    # binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above
-    # binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above
-
-    # print(binaryTree1.levelOrder()) # print the level order traversal of the binary tree, binaryTree1
     # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
     # print(binaryTree1 == binaryTree2) # print if binaryTree1 and binaryTree2 are equal
     # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
