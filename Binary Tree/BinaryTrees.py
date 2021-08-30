@@ -515,8 +515,8 @@ class TestBinaryTreeMethods(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         """
-        The setUpClass function that will instantiate a few binary trees to work with for the testing of the 
-        functions.
+        The setUpClass function that will instantiate a few binary trees and binary search trees to work with 
+        for the testing of the functions.
         """
         self.binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the binary tree functions.
         self.binaryTree2 = BinaryTree(1, BinaryTree(2, BinaryTree(5), BinaryTree(9)), BinaryTree(3, BinaryTree(2, BinaryTree(2), None), None)) # define a binary tree, binaryTree2 to test the binary tree functions.
@@ -572,12 +572,22 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree1.levelOrder(), levelOrder1) # Check if binaryTree1's call to the levelOrder() function yields the correct output.
         self.assertEqual(self.binaryTree2.levelOrder(), levelOrder2) # Check if binaryTree2's call to the levelOrder() function yields the correct output.
 
+    def testInverse(self):
+        """
+        A function to test the functionality of the class BinaryTree's inverse()'s function.
+        """
+        inverseBinaryTreeString1 = "3\n  4\n    None\n    2\n      None\n      None\n  2\n    None\n    1\n      None\n      None" # The expected output of binaryTree1's call to inverse() and then binaryTreeString().
+        inverseBinaryTreeString2 = "1\n  3\n    None\n    2\n      None\n      2\n        None\n        None\n  2\n    9\n      None\n      None\n    5\n      None\n      None" # The expected output of binaryTree2's call to inverse() and then binaryTreeString().
+
+        self.assertEqual(self.binaryTree1.inverse().binaryTreeString(), inverseBinaryTreeString1) # Check if binaryTree1's call to the inverse() function yields the correct output.
+        self.assertEqual(self.binaryTree2.inverse().binaryTreeString(), inverseBinaryTreeString2) # Check if binaryTree2's call to the inverse() function yields the correct output.
+
+
 if __name__ == "__main__":
     unittest.main()
 
     # vvv Sloppy Testing (To be removed) vvv
 
-    # print(binaryTree1.inverse().binaryTreeString()) # print the inverse/mirror of the binary tree, binaryTree1
     # print(binaryTree1 == binaryTree2) # print if binaryTree1 and binaryTree2 are equal
     # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
     # print(binaryTree1.numberOfNodes()) # print the number of nodes in binaryTree1
