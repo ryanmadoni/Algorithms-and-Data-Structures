@@ -582,13 +582,18 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree1.inverse().binaryTreeString(), inverseBinaryTreeString1) # Check if binaryTree1's call to the inverse() function yields the correct output.
         self.assertEqual(self.binaryTree2.inverse().binaryTreeString(), inverseBinaryTreeString2) # Check if binaryTree2's call to the inverse() function yields the correct output.
 
+    def testEqual(self):
+        """
+        A function to test the functionality of the class BinaryTree's overridden equal()'s function.
+        """
+        self.assertNotEqual(self.binaryTree5, self.binaryTree6) # Check if binaryTree5 and binaryTree6 are not equal.
+        self.assertEqual(self.binaryTree6, self.binaryTree7) # Check if binaryTree6 and binaryTree7 are equal.
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
     # vvv Sloppy Testing (To be removed) vvv
 
-    # print(binaryTree1 == binaryTree2) # print if binaryTree1 and binaryTree2 are equal
     # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
     # print(binaryTree1.numberOfNodes()) # print the number of nodes in binaryTree1
     # print(binaryTree1.numberOfInternalNodes()) # print the number of internal nodes in binaryTree1
