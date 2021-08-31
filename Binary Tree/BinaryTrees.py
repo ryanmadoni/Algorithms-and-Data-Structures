@@ -602,13 +602,19 @@ class TestBinaryTreeMethods(unittest.TestCase):
         """
         A function to test the functionality of the class BinaryTree's numberOfNodes()'s function.
         """
-        pass
+        self.assertEqual(self.binaryTree1.numberOfNodes(), 5) # Check if binaryTree1's call to the numberOfNodes() function yields the correct output.
+        self.assertEqual(self.binaryTree2.numberOfNodes(), 7) # Check if binaryTree2's call to the numberOfNodes() function yields the correct output.
+        self.assertEqual(self.binaryTree3.numberOfNodes(), 5) # Check if binaryTree3's call to the numberOfNodes() function yields the correct output.
+        self.assertEqual(self.binaryTree4.numberOfNodes(), 5) # Check if binaryTree4's call to the numberOfNodes() function yields the correct output.
 
     def testNumberOfInternalNodes(self):
         """
         A function to test the functionality of the class BinaryTree's numberOfInternalNodes()'s function.
         """
-        pass
+        self.assertEqual(self.binaryTree1.numberOfInternalNodes(), 3) # Check if binaryTree1's call to the numberOfInternalNodes() function yields the correct output.
+        self.assertEqual(self.binaryTree2.numberOfInternalNodes(), 4) # Check if binaryTree2's call to the numberOfInternalNodes() function yields the correct output.
+        self.assertEqual(self.binaryTree3.numberOfInternalNodes(), 4) # Check if binaryTree3's call to the numberOfInternalNodes() function yields the correct output.
+        self.assertEqual(self.binaryTree4.numberOfInternalNodes(), 2) # Check if binaryTree4's call to the numberOfInternalNodes() function yields the correct output.
 
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
