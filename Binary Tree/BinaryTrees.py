@@ -589,14 +589,32 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertNotEqual(self.binaryTree5, self.binaryTree6) # Check if binaryTree5 and binaryTree6 are not equal.
         self.assertEqual(self.binaryTree6, self.binaryTree7) # Check if binaryTree6 and binaryTree7 are equal.
 
+    def testNumberOfLeaves(self):
+        """
+        A function to test the functionality of the class BinaryTree's numberOfLeaves()'s function.
+        """
+        self.assertEqual(self.binaryTree1.numberOfLeaves(), 2) # Check if binaryTree1's call to the numberOfLeaves() function yields the correct output.
+        self.assertEqual(self.binaryTree2.numberOfLeaves(), 3) # Check if binaryTree2's call to the numberOfLeaves() function yields the correct output.
+        self.assertEqual(self.binaryTree3.numberOfLeaves(), 1) # Check if binaryTree3's call to the numberOfLeaves() function yields the correct output.
+        self.assertEqual(self.binaryTree4.numberOfLeaves(), 3) # Check if binaryTree4's call to the numberOfLeaves() function yields the correct output.
+
+    def testNumberOfNodes(self):
+        """
+        A function to test the functionality of the class BinaryTree's numberOfNodes()'s function.
+        """
+        pass
+
+    def testNumberOfInternalNodes(self):
+        """
+        A function to test the functionality of the class BinaryTree's numberOfInternalNodes()'s function.
+        """
+        pass
+
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
     # vvv Sloppy Testing (To be removed) vvv
 
-    # print(binaryTree1.numberOfLeaves()) # print the number of leaves in binaryTree1
-    # print(binaryTree1.numberOfNodes()) # print the number of nodes in binaryTree1
-    # print(binaryTree1.numberOfInternalNodes()) # print the number of internal nodes in binaryTree1
     # print(binaryTree1.paths()) # print the paths of the binary tree, binaryTree1
     # print(binaryTree1.pathSum(6)) # print the first path that has the sum 6 in the binary tree, binaryTree1 
     # print(binaryTree1.height()) # print the height of the binary tree, binaryTree1
