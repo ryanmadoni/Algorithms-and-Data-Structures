@@ -525,6 +525,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.binaryTree5 = BinaryTree(1, BinaryTree(2, BinaryTree(3,  BinaryTree(8), BinaryTree(9)), BinaryTree(4, BinaryTree(10), None)), BinaryTree(5, BinaryTree(6), BinaryTree(7))) # define a binary tree, binaryTree5, to test the functions above.
         self.binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above.
         self.binaryTree7 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree7, to test the functions above.
+        self.binaryTree8 = BinaryTree(17, BinaryTree(8, BinaryTree(3), BinaryTree(14)), BinaryTree(25, BinaryTree(20), BinaryTree(30))) # define a binary tree, binaryTree8, to test the functions above.
 
     def testBinaryTreeString(self):
         """
@@ -616,13 +617,41 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree3.numberOfInternalNodes(), 4) # Check if binaryTree3's call to the numberOfInternalNodes() function yields the correct output.
         self.assertEqual(self.binaryTree4.numberOfInternalNodes(), 2) # Check if binaryTree4's call to the numberOfInternalNodes() function yields the correct output.
 
+    def testPaths(self):
+        """
+        A function to test the functionality of the class BinaryTree's paths()'s function.
+        """
+        self.assertEqual(self.binaryTree1.paths(), [[3, 2, 1], [3, 4, 2]]) # Check if binaryTree1's call to the paths() function yields the correct output.
+        self.assertEqual(self.binaryTree2.paths(), [[1, 2, 5], [1, 2, 9], [1, 3, 2, 2]]) # Check if binaryTree2's call to the paths() function yields the correct output.
+        self.assertEqual(self.binaryTree3.paths(), [[1, 2, 3, 4, 5]]) # Check if binaryTree3's call to the paths() function yields the correct output.
+        self.assertEqual(self.binaryTree8.paths(), [[17, 8, 3], [17, 8, 14], [17, 25, 20], [17, 25, 30]]) # Check if binaryTree8's call to the paths() function yields the correct output.
+
+    def testPathSum(self):
+        """
+        A function to test the functionality of the class BinaryTree's pathSum()'s function.
+        """
+        self.assertEqual(self.binaryTree1.pathSum(6), [3, 2, 1]) # Check if binaryTree1's call to the pathSum(5) function yields the correct output.
+        self.assertEqual(self.binaryTree2.pathSum(8), [1, 2, 5]) # Check if binaryTree2's call to the pathSum(8) function yields the correct output.
+        self.assertEqual(self.binaryTree3.pathSum(2), []) # Check if binaryTree3's call to the pathSum(2) function yields the correct output.
+        self.assertEqual(self.binaryTree8.pathSum(39), [17, 8, 14]) # Check if binaryTree8's call to the pathSum(39) function yields the correct output.
+        self.assertEqual(self.binaryTree8.pathSum(40), []) # Check if binaryTree8's call to the pathSum(40) function yields the correct output.
+
+    def testHeight(self):
+        """
+        A function to test the functionality of the class BinaryTree's height()'s function.
+        """
+        pass
+
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
-    # vvv Sloppy Testing (To be removed) vvv
+    binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the binary tree functions.
+    binaryTree2 = BinaryTree(1, BinaryTree(2, BinaryTree(5), BinaryTree(9)), BinaryTree(3, BinaryTree(2, BinaryTree(2), None), None)) # define a binary tree, binaryTree2 to test the binary tree functions.
+    binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above.
+    binaryTree8 = BinaryTree(17, BinaryTree(8, BinaryTree(3), BinaryTree(14)), BinaryTree(25, BinaryTree(20), BinaryTree(30)))
 
-    # print(binaryTree1.paths()) # print the paths of the binary tree, binaryTree1
-    # print(binaryTree1.pathSum(6)) # print the first path that has the sum 6 in the binary tree, binaryTree1 
+    # vvv Sloppy Testing (To be removed) vvv
+ 
     # print(binaryTree1.height()) # print the height of the binary tree, binaryTree1
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
     # print(binaryTree1.width(1)) # get the width of binaryTree1's 1st level
