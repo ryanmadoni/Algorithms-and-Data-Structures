@@ -654,6 +654,15 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree3.width(2), 1) # Check if binaryTree3's call to the width() function yields the correct output.
         self.assertEqual(self.binaryTree4.width(0), 1) # Check if binaryTree4's call to the width() function yields the correct output.
 
+    def testMaxWidth(self):
+        """
+        A function to test the functionality of the class BinaryTree's maxWidth()'s function.
+        """
+        self.assertEqual(self.binaryTree1.maxWidth(), 2) # Check if binaryTree1's call to the maxWidth() function yields the correct output.
+        self.assertEqual(self.binaryTree2.maxWidth(), 3) # Check if binaryTree2's call to the maxWidth() function yields the correct output.
+        self.assertEqual(self.binaryTree3.maxWidth(), 1) # Check if binaryTree3's call to the maxWidth() function yields the correct output.
+        self.assertEqual(self.binaryTree4.maxWidth(), 2) # Check if binaryTree4's call to the maxWidth() function yields the correct output.
+
 
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
@@ -666,7 +675,6 @@ if __name__ == "__main__":
     # vvv Sloppy Testing (To be removed) vvv
  
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-    # print(binaryTree1.maxWidth()) # print the max width of the binary tree, binaryTree1
     # print(binaryTree1.diameter()) # print the diameter of the binary tree, binaryTree1
     # print(binaryTree1.isBalanced()) # print a boolean denoting if the binary tree, binaryTree1 is balanced
     # print(binaryTree1.isPerfect()) # print a boolean denoting if the binary tree, binaryTree1 is perfect
