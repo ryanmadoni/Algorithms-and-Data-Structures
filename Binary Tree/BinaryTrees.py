@@ -214,7 +214,7 @@ class BinaryTree:
         Takes as input self, then returns the diameter of the binary tree, self.  The diameter of a binary tree is
         defined as the number of nodes on the longest path between any two leaves in the binary tree.
         """
-        return self.l.height() + 1 + self.r.height() # Return the height of the left and right subtrees plus 1 for the current node.
+        return (self.l.height() if self.l != None else 0) + 1 + (self.r.height() if self.r != None else 0) # Return the height of the left and right subtrees plus 1 for the current node if it is not None.
 
     def isLeftSkewed(self):
         """
@@ -663,6 +663,14 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree3.maxWidth(), 1) # Check if binaryTree3's call to the maxWidth() function yields the correct output.
         self.assertEqual(self.binaryTree4.maxWidth(), 2) # Check if binaryTree4's call to the maxWidth() function yields the correct output.
 
+    def testDiameter(self):
+        """
+        A function to test the functionality of the class BinaryTree's diameter()'s function.
+        """
+        self.assertEqual(self.binaryTree1.diameter(), 5) # Check if binaryTree1's call to the diameter() function yields the correct output.
+        self.assertEqual(self.binaryTree2.diameter(), 6) # Check if binaryTree2's call to the diameter() function yields the correct output.
+        self.assertEqual(self.binaryTree3.diameter(), 5) # Check if binaryTree3's call to the diameter() function yields the correct output.
+        self.assertEqual(self.binaryTree4.diameter(), 4) # Check if binaryTree4's call to the diameter() function yields the correct output.
 
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
@@ -675,7 +683,6 @@ if __name__ == "__main__":
     # vvv Sloppy Testing (To be removed) vvv
  
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-    # print(binaryTree1.diameter()) # print the diameter of the binary tree, binaryTree1
     # print(binaryTree1.isBalanced()) # print a boolean denoting if the binary tree, binaryTree1 is balanced
     # print(binaryTree1.isPerfect()) # print a boolean denoting if the binary tree, binaryTree1 is perfect
 
