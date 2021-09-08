@@ -526,6 +526,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.binaryTree6 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree6, to test the functions above.
         self.binaryTree7 = BinaryTree(7, BinaryTree(3, BinaryTree(1), BinaryTree(5)), BinaryTree(10, BinaryTree(8))) # define a binary tree, binaryTree7, to test the functions above.
         self.binaryTree8 = BinaryTree(17, BinaryTree(8, BinaryTree(3), BinaryTree(14)), BinaryTree(25, BinaryTree(20), BinaryTree(30))) # define a binary tree, binaryTree8, to test the functions above.
+        self.binaryTree9 = BinaryTree(17, BinaryTree(8, BinaryTree(3), BinaryTree(14)), BinaryTree(25, BinaryTree(20), None)) # define a binary tree, binaryTree9, to test the functions above.
 
     def testBinaryTreeString(self):
         """
@@ -681,6 +682,17 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree3.isBalanced(), False) # Check if binaryTree3's call to the isBalanced() function yields the correct output.
         self.assertEqual(self.binaryTree4.isBalanced(), True) # Check if binaryTree4's call to the isBalanced() function yields the correct output.
 
+    def testIsComplete(self):
+        """
+        A function to test the functionality of the class BinaryTree's isComplete()'s function.
+        """
+        self.assertEqual(self.binaryTree1.isComplete(), False) # Check if binaryTree1's call to the isComplete() function yields the correct output.
+        self.assertEqual(self.binaryTree2.isComplete(), False) # Check if binaryTree2's call to the isComplete() function yields the correct output.
+        self.assertEqual(self.binaryTree3.isComplete(), False) # Check if binaryTree3's call to the isComplete() function yields the correct output.
+        self.assertEqual(self.binaryTree4.isComplete(), False) # Check if binaryTree4's call to the isComplete() function yields the correct output.
+        self.assertEqual(self.binaryTree8.isComplete(), True) # Check if binaryTree8's call to the isComplete() function yields the correct output.
+        self.assertEqual(self.binaryTree9.isComplete(), True) # Check if binaryTree9's call to the isComplete() function yields the correct output.
+
     def testIsPerfect(self):
         """
         A function to test the functionality of the class BinaryTree's isPerfect()'s function.
@@ -689,7 +701,8 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree2.isPerfect(), False) # Check if binaryTree2's call to the isPerfect() function yields the correct output.
         self.assertEqual(self.binaryTree3.isPerfect(), False) # Check if binaryTree3's call to the isPerfect() function yields the correct output.
         self.assertEqual(self.binaryTree4.isPerfect(), False) # Check if binaryTree4's call to the isPerfect() function yields the correct output.
-        self.assertEqual(self.binaryTree8.isPerfect(), True) # Check if binaryTree4's call to the isPerfect() function yields the correct output.
+        self.assertEqual(self.binaryTree8.isPerfect(), True) # Check if binaryTree8's call to the isPerfect() function yields the correct output.
+        self.assertEqual(self.binaryTree9.isPerfect(), False) # Check if binaryTree9's call to the isPerfect() function yields the correct output.
 
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
@@ -702,15 +715,9 @@ if __name__ == "__main__":
     # vvv Sloppy Testing (To be removed) vvv
  
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-
     # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
-    # print(binaryTree3.isBalanced()) # print a boolean denoting if the binary tree, binaryTree3 is balanced
-
     # print(binaryTree4.isFull()) # print a boolean denoting if the binary tree, binaryTree4 is full
-
     # print(binaryTree5.level(2)) # print level 2 of the binary tree, binaryTree5
-    # print(binaryTree5.isComplete()) # print a boolean denoting if the binary tree, binaryTree4, is complete
-
     # print(binaryTree6.isBinarySearchTree()) # print a boolean denoting if the binary tree, binaryTree6 is a binary search tree
 
     
