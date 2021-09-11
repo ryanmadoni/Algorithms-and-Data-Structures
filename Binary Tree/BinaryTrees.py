@@ -716,6 +716,17 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree8.isPerfect(), True) # Check if binaryTree8's call to the isPerfect() function yields the correct output.
         self.assertEqual(self.binaryTree9.isPerfect(), False) # Check if binaryTree9's call to the isPerfect() function yields the correct output.
 
+    def testIsDegenerate(self):
+        """
+        A function to test the functionality of the class BinaryTree's isDegenerate()'s function.
+        """
+        self.assertEqual(self.binaryTree1.isDegenerate(), False) # Check if binaryTree1's call to the isDegenerate() function yields the correct output.
+        self.assertEqual(self.binaryTree2.isDegenerate(), False) # Check if binaryTree2's call to the isDegenerate() function yields the correct output.
+        self.assertEqual(self.binaryTree3.isDegenerate(), True) # Check if binaryTree3's call to the isDegenerate() function yields the correct output.
+        self.assertEqual(self.binaryTree4.isDegenerate(), False) # Check if binaryTree4's call to the isDegenerate() function yields the correct output.
+        self.assertEqual(self.binaryTree8.isDegenerate(), False) # Check if binaryTree8's call to the isDegenerate() function yields the correct output.
+        self.assertEqual(self.binaryTree9.isDegenerate(), False) # Check if binaryTree9's call to the isDegenerate() function yields the correct output.
+
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
@@ -727,7 +738,6 @@ if __name__ == "__main__":
     # vvv Sloppy Testing (To be removed) vvv
  
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-    # print(binaryTree3.isDegenerate()) # print a boolean denoting if the binary tree, binaryTree3 is degenerate
     # print(binaryTree5.level(2)) # print level 2 of the binary tree, binaryTree5
     # print(binaryTree6.isBinarySearchTree()) # print a boolean denoting if the binary tree, binaryTree6 is a binary search tree
 
