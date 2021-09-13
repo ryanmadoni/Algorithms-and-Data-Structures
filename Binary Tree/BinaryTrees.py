@@ -738,17 +738,21 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree8.level(2), [3, 14, 20, 30]) # Check if binaryTree8's call to the level(2) function yields the correct output.
         self.assertEqual(self.binaryTree9.level(3), []) # Check if binaryTree9's call to the level(3) function yields the correct output.
 
+    def testIsBinarySearchTree(self):
+        """
+        A function to test the functionality of the class BinaryTree's isBinarySearchTree()'s function.
+        """
+        self.assertEqual(self.binaryTree1.isBinarySearchTree(), False) # Check if binaryTree1's call to the isBinarySearchTree() function yields the correct output.
+        self.assertEqual(self.binaryTree2.isBinarySearchTree(), False) # Check if binaryTree2's call to the isBinarySearchTree() function yields the correct output.
+        self.assertEqual(self.binaryTree3.isBinarySearchTree(), False) # Check if binaryTree3's call to the isBinarySearchTree() function yields the correct output.
+        self.assertEqual(self.binaryTree4.isBinarySearchTree(), False) # Check if binaryTree4's call to the isBinarySearchTree() function yields the correct output.
+        self.assertEqual(self.binaryTree8.isBinarySearchTree(), True) # Check if binaryTree8's call to the isBinarySearchTree() function yields the correct output.
+        self.assertEqual(self.binaryTree9.isBinarySearchTree(), True) # Check if binaryTree9's call to the isBinarySearchTree() function yields the correct output.
+
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
-    binaryTree1 = BinaryTree(3, BinaryTree(2, BinaryTree(1)), BinaryTree(4, BinaryTree(2), None)) # define a binary tree, binaryTree1 to test the binary tree functions.
-    binaryTree2 = BinaryTree(1, BinaryTree(2, BinaryTree(5), BinaryTree(9)), BinaryTree(3, BinaryTree(2, BinaryTree(2), None), None)) # define a binary tree, binaryTree2 to test the binary tree functions.
-    binaryTree3 = BinaryTree(1, BinaryTree(2, None, BinaryTree(3, BinaryTree(4, BinaryTree(5), None))), None) # define a binary tree, binaryTree3, to test the functions above.
-    binaryTree8 = BinaryTree(17, BinaryTree(8, BinaryTree(3), BinaryTree(14)), BinaryTree(25, BinaryTree(20), BinaryTree(30)))
-
-    # vvv Sloppy Testing (To be removed) vvv
- 
+    # Last sloppy test.  To be removed
     # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-    # print(binaryTree6.isBinarySearchTree()) # print a boolean denoting if the binary tree, binaryTree6 is a binary search tree
 
     
