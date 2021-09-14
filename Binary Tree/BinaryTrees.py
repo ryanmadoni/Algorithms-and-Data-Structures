@@ -637,6 +637,18 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree8.pathSum(39), [17, 8, 14]) # Check if binaryTree8's call to the pathSum(39) function yields the correct output.
         self.assertEqual(self.binaryTree8.pathSum(40), []) # Check if binaryTree8's call to the pathSum(40) function yields the correct output.
 
+    def testContains(self):
+        """
+        A function to test the functionality of the class BinaryTree's contains()'s function.
+        """
+        subtree1 = BinaryTree(2, BinaryTree(1, None), None) # a subtree, subtree1, to test the contains() function.
+        subtree2 = BinaryTree(3, BinaryTree(4), BinaryTree(4)) # a subtree, subtree2, to test the contains() function.
+
+        self.assertEqual(self.binaryTree1.contains(subtree1), True) # Check if binaryTree1's call to the contains(subtree1) function yields the correct output.
+        self.assertEqual(self.binaryTree2.contains(subtree1), False) # Check if binaryTree2's call to the contains(subtree1) function yields the correct output.
+        self.assertEqual(self.binaryTree3.contains(subtree2), False) # Check if binaryTree3's call to the contains(subtree2) function yields the correct output.
+        self.assertEqual(self.binaryTree4.contains(subtree2), True) # Check if binaryTree4's call to the contains(subtree2) function yields the correct output.
+
     def testHeight(self):
         """
         A function to test the functionality of the class BinaryTree's height()'s function.
@@ -752,7 +764,5 @@ class TestBinaryTreeMethods(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
-    # Last sloppy test.  To be removed
-    # print(binaryTree1.contains(BinaryTree(2, BinaryTree(1)))) # print whether binaryTree1 contains a specific subtree
-
+    # test insert, delete, and search for BSTs
     
