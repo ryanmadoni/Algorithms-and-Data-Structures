@@ -530,7 +530,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testBinaryTreeString(self):
         """
-        A function to test the functionality of the class BinaryTree's binaryTreeString()'s function.
+        A function to test the functionality of the class BinaryTree's binaryTreeString() function.
         """
         binaryTreeString1 = "3\n  2\n    1\n      None\n      None\n    None\n  4\n    2\n      None\n      None\n    None" # The expected output of binaryTree1's call to binaryTreeString().
         binaryTreeString2 = "1\n  2\n    5\n      None\n      None\n    9\n      None\n      None\n  3\n    2\n      2\n        None\n        None\n      None\n    None" # The expected output of binaryTree2's call to binaryTreeString().
@@ -540,7 +540,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testPreOrder(self):
         """
-        A function to test the functionality of the class BinaryTree's preOrder()'s function.
+        A function to test the functionality of the class BinaryTree's preOrder() function.
         """
         preOrder1, preOrder2 = [3, 2, 1, 4, 2], [1, 2, 5, 9, 3, 2, 2] # The expected output of binaryTree1's and binaryTree2's calls to preOrder().
 
@@ -549,7 +549,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testInOrder(self):
         """
-        A function to test the functionality of the class BinaryTree's inOrder()'s function.
+        A function to test the functionality of the class BinaryTree's inOrder() function.
         """
         inOrder1, inOrder2 = [1, 2, 3, 2, 4], [5, 2, 9, 1, 2, 2, 3] # The expected output of binaryTree1's and binaryTree2's calls to inOrder().
 
@@ -558,7 +558,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testPostOrder(self):
         """
-        A function to test the functionality of the class BinaryTree's postOrder()'s function.
+        A function to test the functionality of the class BinaryTree's postOrder() function.
         """
         postOrder1, postOrder2 = [1, 2, 2, 4, 3], [5, 9, 2, 2, 2, 3, 1] # The expected output of binaryTree1's and binaryTree2's calls to postOrder().
 
@@ -567,7 +567,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testLevelOrder(self):
         """
-        A function to test the functionality of the class BinaryTree's levelOrder()'s function.
+        A function to test the functionality of the class BinaryTree's levelOrder() function.
         """
         levelOrder1, levelOrder2 = [3, 2, 4, 1, 2], [1, 2, 3, 5, 9, 2, 2] # The expected output of binaryTree1's and binaryTree2's calls to levelOrder().
 
@@ -576,7 +576,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testInverse(self):
         """
-        A function to test the functionality of the class BinaryTree's inverse()'s function.
+        A function to test the functionality of the class BinaryTree's inverse() function.
         """
         inverseBinaryTreeString1 = "3\n  4\n    None\n    2\n      None\n      None\n  2\n    None\n    1\n      None\n      None" # The expected output of binaryTree1's call to inverse() and then binaryTreeString().
         inverseBinaryTreeString2 = "1\n  3\n    None\n    2\n      None\n      2\n        None\n        None\n  2\n    9\n      None\n      None\n    5\n      None\n      None" # The expected output of binaryTree2's call to inverse() and then binaryTreeString().
@@ -586,14 +586,14 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testEqual(self):
         """
-        A function to test the functionality of the class BinaryTree's overridden equal()'s function.
+        A function to test the functionality of the class BinaryTree's overridden equal() function.
         """
         self.assertNotEqual(self.binaryTree5, self.binaryTree6) # Check if binaryTree5 and binaryTree6 are not equal.
         self.assertEqual(self.binaryTree6, self.binaryTree7) # Check if binaryTree6 and binaryTree7 are equal.
 
     def testNumberOfLeaves(self):
         """
-        A function to test the functionality of the class BinaryTree's numberOfLeaves()'s function.
+        A function to test the functionality of the class BinaryTree's numberOfLeaves() function.
         """
         self.assertEqual(self.binaryTree1.numberOfLeaves(), 2) # Check if binaryTree1's call to the numberOfLeaves() function yields the correct output.
         self.assertEqual(self.binaryTree2.numberOfLeaves(), 3) # Check if binaryTree2's call to the numberOfLeaves() function yields the correct output.
@@ -602,7 +602,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testNumberOfNodes(self):
         """
-        A function to test the functionality of the class BinaryTree's numberOfNodes()'s function.
+        A function to test the functionality of the class BinaryTree's numberOfNodes() function.
         """
         self.assertEqual(self.binaryTree1.numberOfNodes(), 5) # Check if binaryTree1's call to the numberOfNodes() function yields the correct output.
         self.assertEqual(self.binaryTree2.numberOfNodes(), 7) # Check if binaryTree2's call to the numberOfNodes() function yields the correct output.
@@ -611,7 +611,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testNumberOfInternalNodes(self):
         """
-        A function to test the functionality of the class BinaryTree's numberOfInternalNodes()'s function.
+        A function to test the functionality of the class BinaryTree's numberOfInternalNodes() function.
         """
         self.assertEqual(self.binaryTree1.numberOfInternalNodes(), 3) # Check if binaryTree1's call to the numberOfInternalNodes() function yields the correct output.
         self.assertEqual(self.binaryTree2.numberOfInternalNodes(), 4) # Check if binaryTree2's call to the numberOfInternalNodes() function yields the correct output.
@@ -620,7 +620,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testPaths(self):
         """
-        A function to test the functionality of the class BinaryTree's paths()'s function.
+        A function to test the functionality of the class BinaryTree's paths() function.
         """
         self.assertEqual(self.binaryTree1.paths(), [[3, 2, 1], [3, 4, 2]]) # Check if binaryTree1's call to the paths() function yields the correct output.
         self.assertEqual(self.binaryTree2.paths(), [[1, 2, 5], [1, 2, 9], [1, 3, 2, 2]]) # Check if binaryTree2's call to the paths() function yields the correct output.
@@ -629,7 +629,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testPathSum(self):
         """
-        A function to test the functionality of the class BinaryTree's pathSum()'s function.
+        A function to test the functionality of the class BinaryTree's pathSum() function.
         """
         self.assertEqual(self.binaryTree1.pathSum(6), [3, 2, 1]) # Check if binaryTree1's call to the pathSum(5) function yields the correct output.
         self.assertEqual(self.binaryTree2.pathSum(8), [1, 2, 5]) # Check if binaryTree2's call to the pathSum(8) function yields the correct output.
@@ -639,7 +639,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testContains(self):
         """
-        A function to test the functionality of the class BinaryTree's contains()'s function.
+        A function to test the functionality of the class BinaryTree's contains() function.
         """
         subtree1 = BinaryTree(2, BinaryTree(1, None), None) # a subtree, subtree1, to test the contains() function.
         subtree2 = BinaryTree(3, BinaryTree(4), BinaryTree(4)) # a subtree, subtree2, to test the contains() function.
@@ -651,7 +651,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testHeight(self):
         """
-        A function to test the functionality of the class BinaryTree's height()'s function.
+        A function to test the functionality of the class BinaryTree's height() function.
         """
         self.assertEqual(self.binaryTree1.height(), 3) # Check if binaryTree1's call to the height() function yields the correct output.
         self.assertEqual(self.binaryTree2.height(), 4) # Check if binaryTree2's call to the height() function yields the correct output.
@@ -660,7 +660,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testWidth(self):
         """
-        A function to test the functionality of the class BinaryTree's width()'s function.
+        A function to test the functionality of the class BinaryTree's width() function.
         """
         self.assertEqual(self.binaryTree1.width(1), 2) # Check if binaryTree1's call to the width() function yields the correct output.
         self.assertEqual(self.binaryTree2.width(2), 3) # Check if binaryTree2's call to the width() function yields the correct output.
@@ -669,7 +669,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testMaxWidth(self):
         """
-        A function to test the functionality of the class BinaryTree's maxWidth()'s function.
+        A function to test the functionality of the class BinaryTree's maxWidth() function.
         """
         self.assertEqual(self.binaryTree1.maxWidth(), 2) # Check if binaryTree1's call to the maxWidth() function yields the correct output.
         self.assertEqual(self.binaryTree2.maxWidth(), 3) # Check if binaryTree2's call to the maxWidth() function yields the correct output.
@@ -678,7 +678,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testDiameter(self):
         """
-        A function to test the functionality of the class BinaryTree's diameter()'s function.
+        A function to test the functionality of the class BinaryTree's diameter() function.
         """
         self.assertEqual(self.binaryTree1.diameter(), 5) # Check if binaryTree1's call to the diameter() function yields the correct output.
         self.assertEqual(self.binaryTree2.diameter(), 6) # Check if binaryTree2's call to the diameter() function yields the correct output.
@@ -687,7 +687,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testIsBalanced(self):
         """
-        A function to test the functionality of the class BinaryTree's isBalanced()'s function.
+        A function to test the functionality of the class BinaryTree's isBalanced() function.
         """
         self.assertEqual(self.binaryTree1.isBalanced(), True) # Check if binaryTree1's call to the isBalanced() function yields the correct output.
         self.assertEqual(self.binaryTree2.isBalanced(), False) # Check if binaryTree2's call to the isBalanced() function yields the correct output.
@@ -696,7 +696,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testIsFull(self):
         """
-        A function to test the functionality of the class BinaryTree's isFull()'s function.
+        A function to test the functionality of the class BinaryTree's isFull() function.
         """
         self.assertEqual(self.binaryTree1.isFull(), False) # Check if binaryTree1's call to the isFull() function yields the correct output.
         self.assertEqual(self.binaryTree2.isFull(), False) # Check if binaryTree2's call to the isFull() function yields the correct output.
@@ -708,7 +708,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testIsComplete(self):
         """
-        A function to test the functionality of the class BinaryTree's isComplete()'s function.
+        A function to test the functionality of the class BinaryTree's isComplete() function.
         """
         self.assertEqual(self.binaryTree1.isComplete(), False) # Check if binaryTree1's call to the isComplete() function yields the correct output.
         self.assertEqual(self.binaryTree2.isComplete(), False) # Check if binaryTree2's call to the isComplete() function yields the correct output.
@@ -719,7 +719,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testIsPerfect(self):
         """
-        A function to test the functionality of the class BinaryTree's isPerfect()'s function.
+        A function to test the functionality of the class BinaryTree's isPerfect() function.
         """
         self.assertEqual(self.binaryTree1.isPerfect(), False) # Check if binaryTree1's call to the isPerfect() function yields the correct output.
         self.assertEqual(self.binaryTree2.isPerfect(), False) # Check if binaryTree2's call to the isPerfect() function yields the correct output.
@@ -730,7 +730,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testIsDegenerate(self):
         """
-        A function to test the functionality of the class BinaryTree's isDegenerate()'s function.
+        A function to test the functionality of the class BinaryTree's isDegenerate() function.
         """
         self.assertEqual(self.binaryTree1.isDegenerate(), False) # Check if binaryTree1's call to the isDegenerate() function yields the correct output.
         self.assertEqual(self.binaryTree2.isDegenerate(), False) # Check if binaryTree2's call to the isDegenerate() function yields the correct output.
@@ -741,7 +741,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testLevel(self):
         """
-        A function to test the functionality of the class BinaryTree's level()'s function.
+        A function to test the functionality of the class BinaryTree's level() function.
         """
         self.assertEqual(self.binaryTree1.level(0), [3]) # Check if binaryTree1's call to the level(0) function yields the correct output.
         self.assertEqual(self.binaryTree2.level(1), [2, 3]) # Check if binaryTree2's call to the level(1) function yields the correct output.
@@ -752,7 +752,7 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testIsBinarySearchTree(self):
         """
-        A function to test the functionality of the class BinaryTree's isBinarySearchTree()'s function.
+        A function to test the functionality of the class BinaryTree's isBinarySearchTree() function.
         """
         self.assertEqual(self.binaryTree1.isBinarySearchTree(), False) # Check if binaryTree1's call to the isBinarySearchTree() function yields the correct output.
         self.assertEqual(self.binaryTree2.isBinarySearchTree(), False) # Check if binaryTree2's call to the isBinarySearchTree() function yields the correct output.
@@ -761,8 +761,40 @@ class TestBinaryTreeMethods(unittest.TestCase):
         self.assertEqual(self.binaryTree8.isBinarySearchTree(), True) # Check if binaryTree8's call to the isBinarySearchTree() function yields the correct output.
         self.assertEqual(self.binaryTree9.isBinarySearchTree(), True) # Check if binaryTree9's call to the isBinarySearchTree() function yields the correct output.
 
+    def testInsert(self):
+        """
+        A function to test the functionality of the class BinarySearchTree's insert() function.
+        """
+        bst1 = BinarySearchTree(5) # create a binary search tree, bst1.
+        binarySearchTreeString1 = "5\n  3\n    2\n      1\n        None\n        None\n      None\n    None\n  18\n    None\n    22\n      None\n      None" # The expected output of binaryTree2's call to binaryTreeString().
+        
+        self.assertEqual(bst1.insert(3), True) # Check if bst1's call to the insert(3) function yields the correct output.
+        self.assertEqual(bst1.insert(2), True) # Check if bst1's call to the insert(2) function yields the correct output.
+        self.assertEqual(bst1.insert(1), True) # Check if bst1's call to the insert(1) function yields the correct output.
+        self.assertEqual(bst1.insert(18), True) # Check if bst1's call to the insert(18) function yields the correct output.
+        self.assertEqual(bst1.insert(18), False) # Check if bst1's call to the insert(18) function yields the correct output.
+        self.assertEqual(bst1.insert(22), True) # Check if bst1's call to the insert(22) function yields the correct output.
+        self.assertEqual(bst1.insert(2), False) # Check if bst1's call to the insert(2) function yields the correct output.
+
+        self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1) # Check if bst1's call to the binaryTreeString() function yields the correct output.
+
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
-    # test insert, delete, and search for BSTs
+    # test delete, and search for BSTs
+
+    # binarySearchTreeString1 = "5\n  3\n    2\n      1\n        None\n        None\n      None\n    None\n  18\n    None\n    22\n      None\n      None" # The expected output of binaryTree2's call to binaryTreeString().
+    
+    # bst1 = BinarySearchTree(5) # create a binary search tree, bst1. 
+    # bst1.insert(3)
+    # bst1.insert(2)
+    # bst1.insert(1)
+    # bst1.insert(18)
+    # bst1.insert(18)
+    # bst1.insert(22)
+    # bst1.insert(2)
+
+    #print(bst1.binaryTreeString())
+
+
     
