@@ -778,6 +778,27 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
         self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1) # Check if bst1's call to the binaryTreeString() function yields the correct output.
 
+    def testDelete(self):
+        """
+        A function to test the functionality of the class BinarySearchTree's insert() function.
+        """
+        bst1 = BinarySearchTree(5) # create a binary search tree, bst1.
+        binarySearchTreeString1 = "5\n  3\n    2\n      1\n        None\n        None\n      None\n    None\n  22\n    None\n    None" # The expected output of binaryTree2's call to binaryTreeString().
+        
+        self.assertEqual(bst1.insert(3), True) # Check if bst1's call to the insert(3) function yields the correct output.
+        self.assertEqual(bst1.insert(2), True) # Check if bst1's call to the insert(2) function yields the correct output.
+        self.assertEqual(bst1.insert(1), True) # Check if bst1's call to the insert(1) function yields the correct output.
+        self.assertEqual(bst1.insert(18), True) # Check if bst1's call to the insert(18) function yields the correct output.
+        self.assertEqual(bst1.insert(18), False) # Check if bst1's call to the insert(18) function yields the correct output.
+        self.assertEqual(bst1.insert(22), True) # Check if bst1's call to the insert(22) function yields the correct output.
+        self.assertEqual(bst1.insert(2), False) # Check if bst1's call to the insert(2) function yields the correct output.
+
+        self.assertEqual(bst1.delete(100), False) # Check if bst1's call to the delete(100) function yields the correct output.
+        self.assertEqual(bst1.delete(18), True) # Check if bst1's call to the delete(100) function yields the correct output.
+
+        self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1) # Check if bst1's call to the binaryTreeString() function yields the correct output.
+
+
 if __name__ == "__main__":
     unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
 
@@ -794,7 +815,7 @@ if __name__ == "__main__":
     # bst1.insert(22)
     # bst1.insert(2)
 
-    #print(bst1.binaryTreeString())
+    # print(bst1.binaryTreeString())
 
 
     
