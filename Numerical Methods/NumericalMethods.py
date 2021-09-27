@@ -7,7 +7,8 @@ Description:
 def NewtonInterpolation(L, x):
     """
     Takes as input a list of 2-tuples, i.e., points, L, then interpolates and returns f(x), where f
-    is the unique len(L) - 1 degree polynomial containing all points in L.
+    is the unique len(L) - 1 degree polynomial containing all points in L.  Uses Newton Interpolation with 
+    Divided Differences.
     """
 
     def dividedDifferences(L):
