@@ -1,7 +1,7 @@
 """
 Author: Ryan Adoni
 Date: 9/22/2021
-Description: 
+Description: The Fibonacci Sequence 
 """
 
 def recursiveFibonnaci(n):
