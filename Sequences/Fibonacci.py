@@ -7,7 +7,9 @@ Description: The Fibonacci Sequence
 import timeit
 import sys
 
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(10000) # Set the recursion limit to some high number for testing for the recrusive function.
+
+
 
 def recursiveFibonnaci(n):
     """
@@ -24,6 +26,7 @@ def recursiveFibonnaci(n):
         return 0 if n == 0 else 1 # return 1 for the first and second Fibonacci number.  Return 0 for the zeroth Fibonacci number.
 
     return recursiveFibonnaci(n - 1) + recursiveFibonnaci(n - 2) # Recurse to return the nth Fibonacci number.
+
 
 
 def iterativeFibonnaci(n):
@@ -44,6 +47,23 @@ def iterativeFibonnaci(n):
         n0, n1 = temp, n0 + n1 # Set n0 to n1 and n1 to the sum of the previous two numbers.
 
     return n1 # return n0, the nth Fibonacci number.
+
+
+
+def fibonacciGenerator():
+    """
+    A generator to generate numbers in the Fibonacci sequence sequentially
+    """
+    nFib = 1 # set the nth Fibonacci number
+    nPlusOnefib = 1 # set the n+1th Fibonacci number
+    
+    # loop forever
+    while True:
+        yield nFib #yield the nth Fibonacci number
+        nPlusTwoFib = nFib + nPlusOnefib # calculate the n+2th Fibonacci number
+        nFib = nPlusOnefib # update the nth Fibonacci number
+        nPlusOnefib = nPlusTwoFib # update the n+1th Fibonacci number
+
 
 
 def wrapper(func, *args, **kwargs):
