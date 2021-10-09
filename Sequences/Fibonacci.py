@@ -6,12 +6,13 @@ Description: The Fibonacci Sequence
 
 import timeit
 import sys
+from math import sqrt
 
 sys.setrecursionlimit(10000) # Set the recursion limit to some high number for testing for the recrusive function.
 
 
 
-def recursiveFibonnaci(n):
+def recursiveFibonacci(n):
     """
     An implementation of the Fibonacci sequence using recursion (a pretty poor implementation).  Takes in a
     positive integer or zero, n, and returns the nth Fibonacci number.
@@ -25,11 +26,11 @@ def recursiveFibonnaci(n):
     if n <= 2:
         return 0 if n == 0 else 1 # return 1 for the first and second Fibonacci number.  Return 0 for the zeroth Fibonacci number.
 
-    return recursiveFibonnaci(n - 1) + recursiveFibonnaci(n - 2) # Recurse to return the nth Fibonacci number.
+    return recursiveFibonacci(n - 1) + recursiveFibonacci(n - 2) # Recurse to return the nth Fibonacci number.
 
 
 
-def iterativeFibonnaci(n):
+def iterativeFibonacci(n):
     """
     An implementation of the Fibonacci sequence using iteration (a pretty poor implementation).  Takes in a
     positive integer or zero, n, and returns the nth Fibonacci number.
@@ -47,6 +48,16 @@ def iterativeFibonnaci(n):
         n0, n1 = temp, n0 + n1 # Set n0 to n1 and n1 to the sum of the previous two numbers.
 
     return n1 # return n0, the nth Fibonacci number.
+
+
+
+def binetFibonacci(n):
+    """
+    An implementation of the Fibonacci sequence using the Binet formula, the fact that the nth Fibonacci number
+    satisfies the following equation: Fn =  [phi^n / sqrt(5)] where phi = (1 + sqrt(5)) / 2 and [] represents
+    the closets integer function.  Takes in a positive integer or zero, n, and returns the nth Fibonacci number.
+    """
+    return round(((1 + sqrt(5)) / 2) ** n / sqrt(5)) # Use a simplfied version of the Binet formula to calculate and return the nth Fibonacci number.
 
 
 
@@ -81,5 +92,15 @@ def wrapper(func, *args, **kwargs):
 
 if __name__ == "__main__":
 
-    print(timeit.timeit(wrapper(recursiveFibonnaci, 10), number = 100)) # Run and time the recursive definition.
-    print(timeit.timeit(wrapper(iterativeFibonnaci, 10), number = 100)) # Run and time the iterative definition.
+    # print(recursiveFibonacci(25))
+    # print(iterativeFibonacci(25))
+    # print(binetFibonacci(25))
+
+    # print(timeit.timeit(wrapper(recursiveFibonacci, 25), number = 10)) # Run and time the recursive definition.
+    print(timeit.timeit(wrapper(iterativeFibonacci, 1000), number = 100)) # Run and time the iterative definition.
+    print(timeit.timeit(wrapper(binetFibonacci, 1000), number = 100)) # Run and time the Binet definition.
+
+    # The Binet calculation scales better with larger n as it is theta(1) while the iterative is still better
+    # than the recrusive definition even though both are close to theta(n) since the overhead for the recursion
+    # is extremely expensive.
+                               
