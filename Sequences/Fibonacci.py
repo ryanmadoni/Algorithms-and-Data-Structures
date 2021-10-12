@@ -51,21 +51,26 @@ def iterativeFibonacci(n):
     return n1 # return n0, the nth Fibonacci number.
 
 
-def matrixFibonacci(N):
+def recursiveMatrixFibonacci(N):
     """
+    An implementation of the Fibonacci sequence using the matrix representation of Fibonacci numbers.  Takes in
+    a positive integer or zero, N, and returns the Nth Fibonacci number (Requires NumPy).
     """
-    A = np.array([[1, 1], [1, 0]])
+    A = np.array([[1, 1], [1, 0]]) # Ininitialize ther matrix, A.
 
     def helper(n, F):
         """
+        A helper function to execute most of the work and so A is not repeatedly instantiated on the recursive 
+        stack.  Takes in the current Fibonacci number, n, and a matrix representation of Fn and Fn+1, F.
         """
 
+        # Base case.  Checks if n is equal to N.
         if n == N:
-            return F[0][0]
+            return F[0][0] # return the Nth Fibonacci number.
         
-        return helper(n + 1, A @ F)
+        return helper(n + 1, A @ F) # Call the helper.  Increment n and dot A with F
 
-    return helper(0, np.array([[0], [1]]))
+    return helper(0, np.array([[0], [1]])) # Call and return the helper using it's initial values.
 
 
 
@@ -111,15 +116,16 @@ def wrapper(func, *args, **kwargs):
 if __name__ == "__main__":
 
     # print(recursiveFibonacci(25))
+    # print(matrixFibonacci(25))
     # print(iterativeFibonacci(25))
-    print(binetFibonacci(25))
-    print(matrixFibonacci(25))
+    # print(binetFibonacci(25))
 
-    # print(timeit.timeit(wrapper(recursiveFibonacci, 25), number = 10)) # Run and time the recursive definition.
-    # print(timeit.timeit(wrapper(iterativeFibonacci, 1000), number = 100)) # Run and time the iterative definition.
-    # print(timeit.timeit(wrapper(binetFibonacci, 1000), number = 100)) # Run and time the Binet definition.
+    print(timeit.timeit(wrapper(recursiveFibonacci, 25), number = 10)) # Run and time the recursive definition.
+    print(timeit.timeit(wrapper(recursiveMatrixFibonacci, 25), number = 10)) # Run and time the matrix definition.
+    print(timeit.timeit(wrapper(iterativeFibonacci, 25), number = 10)) # Run and time the iterative definition.
+    print(timeit.timeit(wrapper(binetFibonacci, 25), number = 10)) # Run and time the Binet definition.
 
     # The Binet calculation scales better with larger n as it is theta(1) while the iterative is still better
     # than the recrusive definition even though both are close to theta(n) since the overhead for the recursion
-    # is extremely expensive.
+    # is extremely expensive.  The recursive matrix definition is faster then the generic recrusive definition.
                                
