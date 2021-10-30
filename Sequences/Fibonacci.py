@@ -126,6 +126,6 @@ if __name__ == "__main__":
     print(timeit.timeit(wrapper(binetFibonacci, 25), number = 10)) # Run and time the Binet definition.
 
     # The Binet calculation scales better with larger n as it is theta(1) while the iterative is still better
-    # than the recrusive definition even though both are close to theta(n) since the overhead for the recursion
+    # than the recursive definition even though both are close to theta(n) since the overhead for the recursion
     # is extremely expensive.  The recursive matrix definition is faster then the generic recrusive definition.
                                
