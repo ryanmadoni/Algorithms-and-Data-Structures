@@ -78,7 +78,7 @@ def binetFibonacci(n):
     """
     An implementation of the Fibonacci sequence using the Binet formula, the fact that the nth Fibonacci number
     satisfies the following equation: Fn =  [phi^n / sqrt(5)] where phi = (1 + sqrt(5)) / 2 and [] represents
-    the closets integer function.  Takes in a positive integer or zero, n, and returns the nth Fibonacci number.
+    the closest integer function.  Takes in a positive integer or zero, n, and returns the nth Fibonacci number.
     """
     return round(((1 + sqrt(5)) / 2) ** n / sqrt(5)) # Use a simplfied version of the Binet formula to calculate and return the nth Fibonacci number.
 
