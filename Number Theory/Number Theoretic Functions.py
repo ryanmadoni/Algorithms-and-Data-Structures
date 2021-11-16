@@ -4,7 +4,7 @@ Date: 6/22/2021
 Description: Number Theoretic Functions
 """
 
-from math import ceil, sqrt
+from math import ceil, sqrt, floor
 from operator import mul
 from functools import reduce
 
@@ -56,9 +56,28 @@ def primeFactor(n):
 
 def phi(n):
     """
-    Takes as input a positive integer, n, then returns phi(n), the number of numbers less than n which are relatively prime to n.
+    Takes as input a positive integer, n, then returns phi(n), the number of numbers less than n which are 
+    relatively prime to n.  Phi is known as Euler's Totient Function.
     """
     return round(n * reduce(mul, [1 - (1 / factor) for factor in set(primeFactor(n))])) # Calculate phi(n) using a formula using n's prime factorization.
+
+
+
+def little_omega(n):
+    """
+    Takes as input a positive integer, n, then returns the number of distinct primes in the prime 
+    factorization of n.
+    """
+    return len(set(primeFactor(n))) # Return the number of distinct primes in the prime factorization of n.
+
+
+
+def big_omega(n):
+    """
+    Takes as input a positive integer, n, then returns the number of non-distinct primes in the prime 
+    factorization of n.
+    """
+    return len(primeFactor(n)) # Return the number of non-distinct primes in the prime factorization of n.
 
 
 
@@ -76,3 +95,14 @@ def d(n):
             s += (d + n // d if d != n // d else d) # Add the divisors to the running sum.
             
     return s # Return the sum of the all the divisors of n.
+
+
+
+if __name__ == "__main__":
+
+    print(primeFactor(100)) # Calculate the prime factoriation of 100.
+    print(phi(100)) # Calculate the number of positive integers less than 100 that are coprime to 100.
+    print(little_omega(100)) # Calculate the number of distinct prime factors of 100.
+    print(big_omega(100)) # Calculate the number of non-distinct prime factors of 100.
+
+    # Convert this file to a .ipynb and show formulas for number theoretic functions.
