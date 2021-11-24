@@ -31,24 +31,34 @@ def recursiveFibonacci(n):
 
 
 
-def iterativeFibonacci(n):
+def recursiveMemoizedFibonacci(n):
     """
-    An implementation of the Fibonacci sequence using iteration (a pretty poor implementation).  Takes in a
-    positive integer or zero, n, and returns the nth Fibonacci number.
+    An implementation of the Fibonacci sequence using memoized recursion.  Takes in a positive integer 
+    or zero, n, and returns the nth Fibonacci number.
     """
+    FibonacciDictionary = {} # A dictionary to store Fibonacci values that have been calculated already.
 
-    # Make sure a valid n was entered.
-    if n <= 0: 
-        return None if n < 0 else 0 # Return None if a number less than 0 was entered and 0 if 0 was entered.
+    def recursiveMemoizedFibonacciHelper(n):
+        # Make sure a valid n was entered.
+        if n < 0: 
+            return None # Return None if a number less than 0 was entered.
 
-    n0, n1 = 0, 1 # Set two variables representing the nth and n+1th Fibonacci numbers.
+        # The base case for the recursion.
+        if n <= 2:
+            return 0 if n == 0 else 1 # return 1 for the first and second Fibonacci number.  Return 0 for the zeroth Fibonacci number.
+        
+        # Check if the n-1th Fibonacci number has been calculated already.
+        if n - 1 not in FibonacciDictionary:
+            FibonacciDictionary[n - 1] = recursiveMemoizedFibonacciHelper(n - 1) # Calculate the value of the n-1st Fibonacci value and at it to the dictionary, FibonacciDictionary.
 
-    # Loop until n is 0 and decrement n each iteration.
-    while (n := n - 1):
-        temp = n1 # Save n1 as a temporary variable
-        n0, n1 = temp, n0 + n1 # Set n0 to n1 and n1 to the sum of the previous two numbers.
+        # Check if the n-2nd Fibonacci number has been calculated already.
+        if n - 2 not in FibonacciDictionary:
+            FibonacciDictionary[n - 2] = recursiveMemoizedFibonacciHelper(n - 2) # Calculate the value of the n-2st Fibonacci value and at it to the dictionary, FibonacciDictionary.
 
-    return n1 # return n0, the nth Fibonacci number.
+        return FibonacciDictionary[n - 1] + FibonacciDictionary[n - 2] # Recurse to return the nth Fibonacci number.
+
+    return recursiveMemoizedFibonacciHelper(n) # Return the output of the helper function.
+
 
 
 def recursiveMatrixFibonacci(N):
@@ -74,16 +84,6 @@ def recursiveMatrixFibonacci(N):
 
 
 
-def binetFibonacci(n):
-    """
-    An implementation of the Fibonacci sequence using the Binet formula, the fact that the nth Fibonacci number
-    satisfies the following equation: Fn =  [phi^n / sqrt(5)] where phi = (1 + sqrt(5)) / 2 and [] represents
-    the closest integer function.  Takes in a positive integer or zero, n, and returns the nth Fibonacci number.
-    """
-    return round(((1 + sqrt(5)) / 2) ** n / sqrt(5)) # Use a simplfied version of the Binet formula to calculate and return the nth Fibonacci number.
-
-
-
 def fibonacciGenerator():
     """
     A generator to generate numbers in the Fibonacci sequence sequentially
@@ -100,6 +100,51 @@ def fibonacciGenerator():
 
 
 
+def generatorFibonacci(n):
+    """
+    Takes as input a positive integer, n, then uses a Python generator to generate the nth Fibonacci nummber.
+    """
+    fibGenerator = fibonacciGenerator() # Instantiate the Fibonacci generator.
+
+    # Loop for n - 1 times to calcualte the n-1st Fibonacci number.
+    for _ in range(n - 1):
+        next(fibGenerator) # Calculate the next Fibonacci number.
+    
+    return next(fibGenerator) # Return the nth Fibonacci number.
+
+
+
+def iterativeFibonacci(n):
+    """
+    An implementation of the Fibonacci sequence using iteration.  Takes in a positive integer or zero, n, 
+    and returns the nth Fibonacci number.
+    """
+
+    # Make sure a valid n was entered.
+    if n <= 0: 
+        return None if n < 0 else 0 # Return None if a number less than 0 was entered and 0 if 0 was entered.
+
+    n0, n1 = 0, 1 # Set two variables representing the nth and n+1th Fibonacci numbers.
+
+    # Loop until n is 0 and decrement n each iteration.
+    while (n := n - 1):
+        temp = n1 # Save n1 as a temporary variable
+        n0, n1 = temp, n0 + n1 # Set n0 to n1 and n1 to the sum of the previous two numbers.
+
+    return n1 # return n0, the nth Fibonacci number.
+
+
+
+def binetFibonacci(n):
+    """
+    An implementation of the Fibonacci sequence using the Binet formula, the fact that the nth Fibonacci number
+    satisfies the following equation: Fn =  [phi^n / sqrt(5)] where phi = (1 + sqrt(5)) / 2 and [] represents
+    the closest integer function.  Takes in a positive integer or zero, n, and returns the nth Fibonacci number.
+    """
+    return round(((1 + sqrt(5)) / 2) ** n / sqrt(5)) # Use a simplfied version of the Binet formula to calculate and return the nth Fibonacci number.
+
+
+
 def wrapper(func, *args, **kwargs):
     """
     Define a wrapper to pass functions to the timeit function
@@ -113,19 +158,39 @@ def wrapper(func, *args, **kwargs):
     return wrapped # Return the wrapper.
 
 
+
+def timeFibonacci(functions, n, attempts):
+    """
+    Takes as input a list of functions that map positive integers to their nth Fibonacci numbers, functions, 
+    and two positive integers, n and attempts and times the Fibonacci functions on input n for attempts times.
+    The function times each funtion and prints the timing results of each function in functions ran attempts 
+    times and averaged over the number of attempts.
+    """
+    
+    # Loop for all functions in lst.
+    for function in functions:
+        time = timeit.timeit(wrapper(function, n), number = attempts) # Calculate the average time to run the function on n attempts times.
+        print(f"{function.__name__} ran for {time} seconds on average over {attempts} function calls.") # Print the timing results nicely.
+
+
+
 if __name__ == "__main__":
 
-    # print(recursiveFibonacci(25))
-    # print(matrixFibonacci(25))
-    # print(iterativeFibonacci(25))
-    # print(binetFibonacci(25))
+    # print(recursiveFibonacci(25)) # Test for correctness.
+    # print(recursiveMemoizedFibonacci(25)) # Test for correctness.
+    # print(matrixFibonacci(25)) # Test for correctness.
+    # print(generatorFibonacci(25)) # Test for correctness.
+    # print(iterativeFibonacci(25)) # Test for correctness.
+    # print(binetFibonacci(25)) # Test for correctness.
 
-    print(timeit.timeit(wrapper(recursiveFibonacci, 25), number = 10)) # Run and time the recursive definition.
-    print(timeit.timeit(wrapper(recursiveMatrixFibonacci, 25), number = 10)) # Run and time the matrix definition.
-    print(timeit.timeit(wrapper(iterativeFibonacci, 25), number = 10)) # Run and time the iterative definition.
-    print(timeit.timeit(wrapper(binetFibonacci, 25), number = 10)) # Run and time the Binet definition.
+    # A list of all Fibonacci Functions to time.
+    functions = [recursiveFibonacci, recursiveMemoizedFibonacci, recursiveMatrixFibonacci, \
+                 generatorFibonacci, iterativeFibonacci, binetFibonacci]
+
+    timeFibonacci(functions, 25, 30) # Time the functions.
 
     # The Binet calculation scales better with larger n as it is theta(1) while the iterative is still better
     # than the recursive definition even though both are close to theta(n) since the overhead for the recursion
     # is extremely expensive.  The recursive matrix definition is faster then the generic recrusive definition.
+    # Memoization drastically increases performance.
                                
