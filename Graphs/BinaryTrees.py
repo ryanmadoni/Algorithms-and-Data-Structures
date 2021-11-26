@@ -8,6 +8,7 @@ from itertools import groupby, chain
 from operator import itemgetter
 import unittest
 
+
 class BinaryTree:
     """
     A class to represent a binary tree and functions that can be applied to them.
@@ -763,60 +764,87 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
     def testInsert(self):
         """
-        A function to test the functionality of the class BinarySearchTree's insert() function.
+        A function to test the functionality of the class
+        BinarySearchTree's insert() function.
         """
-        bst1 = BinarySearchTree(5) # create a binary search tree, bst1.
-        binarySearchTreeString1 = "5\n  3\n    2\n      1\n        None\n        None\n      None\n    None\n  18\n    None\n    22\n      None\n      None" # The expected output of binaryTree2's call to binaryTreeString().
-        
-        self.assertEqual(bst1.insert(3), True) # Check if bst1's call to the insert(3) function yields the correct output.
-        self.assertEqual(bst1.insert(2), True) # Check if bst1's call to the insert(2) function yields the correct output.
-        self.assertEqual(bst1.insert(1), True) # Check if bst1's call to the insert(1) function yields the correct output.
-        self.assertEqual(bst1.insert(18), True) # Check if bst1's call to the insert(18) function yields the correct output.
-        self.assertEqual(bst1.insert(18), False) # Check if bst1's call to the insert(18) function yields the correct output.
-        self.assertEqual(bst1.insert(22), True) # Check if bst1's call to the insert(22) function yields the correct output.
-        self.assertEqual(bst1.insert(2), False) # Check if bst1's call to the insert(2) function yields the correct output.
+        bst1 = BinarySearchTree(5)  # Create a binary search tree, bst1.
 
-        self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1) # Check if bst1's call to the binaryTreeString() function yields the correct output.
+        # The expected output of binaryTree2's call to binaryTreeString().
+        binarySearchTreeString1 = ("5\n  3\n    2\n      1\n        None\n"
+                                   "        None\n      None\n    None\n  18\n"
+                                   "    None\n    22\n      None\n      None")
+
+        # Check if bst1's call to the insert() function
+        # yields the correct output.
+        self.assertEqual(bst1.insert(3), True)
+        self.assertEqual(bst1.insert(2), True)
+        self.assertEqual(bst1.insert(1), True)
+        self.assertEqual(bst1.insert(18), True)
+        self.assertEqual(bst1.insert(18), False)
+        self.assertEqual(bst1.insert(22), True)
+        self.assertEqual(bst1.insert(2), False)
+
+        # Check if bst1's call to the binaryTreeString() function
+        # yields the correct output.
+        self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1)
 
     def testDelete(self):
         """
-        A function to test the functionality of the class BinarySearchTree's delete() function.
+        A function to test the functionality of the class
+        BinarySearchTree's delete() function.
         """
-        bst1 = BinarySearchTree(5) # create a binary search tree, bst1.
-        binarySearchTreeString1 = "5\n  3\n    2\n      1\n        None\n        None\n      None\n    None\n  22\n    None\n    None" # The expected output of binaryTree2's call to binaryTreeString().
-        
-        self.assertEqual(bst1.insert(3), True) # Check if bst1's call to the insert(3) function yields the correct output.
-        self.assertEqual(bst1.insert(2), True) # Check if bst1's call to the insert(2) function yields the correct output.
-        self.assertEqual(bst1.insert(1), True) # Check if bst1's call to the insert(1) function yields the correct output.
-        self.assertEqual(bst1.insert(18), True) # Check if bst1's call to the insert(18) function yields the correct output.
-        self.assertEqual(bst1.insert(18), False) # Check if bst1's call to the insert(18) function yields the correct output.
-        self.assertEqual(bst1.insert(22), True) # Check if bst1's call to the insert(22) function yields the correct output.
-        self.assertEqual(bst1.insert(2), False) # Check if bst1's call to the insert(2) function yields the correct output.
+        bst1 = BinarySearchTree(5)  # create a binary search tree, bst1.
 
-        self.assertEqual(bst1.delete(100), False) # Check if bst1's call to the delete(100) function yields the correct output.
-        self.assertEqual(bst1.delete(18), True) # Check if bst1's call to the delete(100) function yields the correct output.
+        # The expected output of binaryTree2's call to binaryTreeString().
+        binarySearchTreeString1 = ("5\n  3\n    2\n      1\n        None\n"
+                                   "        None\n      None\n    None\n  22\n"
+                                   "    None\n    None")
 
-        self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1) # Check if bst1's call to the binaryTreeString() function yields the correct output.
+        # Check if bst1's call to the insert() function
+        # yields the correct outputs.
+        self.assertEqual(bst1.insert(3), True)
+        self.assertEqual(bst1.insert(2), True)
+        self.assertEqual(bst1.insert(1), True)
+        self.assertEqual(bst1.insert(18), True)
+        self.assertEqual(bst1.insert(18), False)
+        self.assertEqual(bst1.insert(22), True)
+        self.assertEqual(bst1.insert(2), False)
+
+        # Check if bst1's call to the delete() function
+        # yields the correct outputs.
+        self.assertEqual(bst1.delete(100), False)
+        self.assertEqual(bst1.delete(18), True)
+
+        # Check if bst1's call to the binaryTreeString() function
+        # yields the correct output.
+        self.assertEqual(bst1.binaryTreeString(), binarySearchTreeString1)
 
     def testSearch(self):
         """
-        A function to test the functionality of the class BinarySearchTree's insert() function.
+        A function to test the functionality of the class
+        BinarySearchTree's insert() function.
         """
-        bst1 = BinarySearchTree(5) # create a binary search tree, bst1.
- 
-        self.assertEqual(bst1.insert(3), True) # Check if bst1's call to the insert(3) function yields the correct output.
-        self.assertEqual(bst1.insert(2), True) # Check if bst1's call to the insert(2) function yields the correct output.
-        self.assertEqual(bst1.insert(1), True) # Check if bst1's call to the insert(1) function yields the correct output.
-        self.assertEqual(bst1.insert(18), True) # Check if bst1's call to the insert(18) function yields the correct output.
-        self.assertEqual(bst1.insert(18), False) # Check if bst1's call to the insert(18) function yields the correct output.
-        self.assertEqual(bst1.insert(22), True) # Check if bst1's call to the insert(22) function yields the correct output.
-        self.assertEqual(bst1.insert(2), False) # Check if bst1's call to the insert(2) function yields the correct output.
+        bst1 = BinarySearchTree(5)  # create a binary search tree, bst1.
 
-        self.assertEqual(bst1.search(2), True) # Check if bst1's call to the search(2) function yields the correct output.
-        self.assertEqual(bst1.search(1), True) # Check if bst1's call to the search(1) function yields the correct output.
-        self.assertEqual(bst1.search(20), False) # Check if bst1's call to the search(20) function yields the correct output.
-        self.assertEqual(bst1.search(13), False) # Check if bst1's call to the search(13) function yields the correct output.
+        # Check if bst1's call to the insert() function
+        # yields correct outputs.
+        self.assertEqual(bst1.insert(3), True)
+        self.assertEqual(bst1.insert(2), True)
+        self.assertEqual(bst1.insert(1), True)
+        self.assertEqual(bst1.insert(18), True)
+        self.assertEqual(bst1.insert(18), False)
+        self.assertEqual(bst1.insert(22), True)
+        self.assertEqual(bst1.insert(2), False)
+
+        # Check if bst1's call to the search() function
+        # yields the correct outputs.
+        self.assertEqual(bst1.search(2), True)
+        self.assertEqual(bst1.search(1), True)
+        self.assertEqual(bst1.search(20), False)
+        self.assertEqual(bst1.search(13), False)
+
 
 if __name__ == "__main__":
-    unittest.main() # Run the unit tests to test the BinaryTree and BinarySearchTree classes.
-    
+
+    # Run the unit tests for the BinaryTree and BinarySearchTree classes.
+    unittest.main()
