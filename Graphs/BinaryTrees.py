@@ -290,132 +290,199 @@ class BinaryTree:
             of self, but each node's value is put into a
             two-tuple pair with its current level.
             """
-            return [(level, binaryTree.data)] + (helper(binaryTree.left, level + 1) if binaryTree.left is not None else []) + (helper(binaryTree.right, level + 1) if binaryTree.right is not None else []) 
+            left = (helper(binaryTree.left, level + 1) if
+                    binaryTree.left is not None else [])
+            right = (helper(binaryTree.right, level + 1) if
+                     binaryTree.right is not None else [])
+            return [(level, binaryTree.data)] + left + right
 
-        # Use itertools.groupby to group the preorder traversal obtained from the helper to group each level,
-        # then get the max width of the binary tree, self.  This is an extremely Pythonic way of
-        # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
-        # but it could be any traversal: preorder, inorder, or postorder
-        return max([len(list(group)) for _, group in groupby(sorted(helper(self, 0)), lambda p: p[0])])
+        # Use itertools.groupby to group the preorder traversal
+        # obtained from the helper to group each level, then
+        # get the max width of the binary tree, self.  This is
+        # an extremely Pythonic way of coding this function.  A
+        # preorder traversal is arbitrarily used here to simply
+        # traverse the binary tree, but it could be any traversal:
+        # preorder, inorder, or postorder
+        grouped = groupby(sorted(helper(self, 0)), lambda p: p[0])
+        return max([len(list(group)) for _, group in grouped])
 
     def diameter(self):
         """
-        Takes as input self, then returns the diameter of the binary tree, self.  The diameter of a binary tree is
-        defined as the number of nodes on the longest path between any two leaves in the binary tree.
+        Takes as input self, then returns the diameter of the binary
+        tree, self.  The diameter of a binary tree is defined as the
+        number of nodes on the longest path between any two leaves in
+        the binary tree.
         """
-        return (self.left.height() if self.left is not None else 0) + 1 + (self.right.height() if self.right is not None else 0)  # Return the height of the left and right subtrees plus 1 for the current node if it is not None.
+
+        # Return the height of the left and right subtrees
+        # plus 1 for the current node if it is not None.
+        left = (self.left.height() if self.left is not None else 0)
+        right = (self.right.height() if self.right is not None else 0)
+        return left + 1 + right
 
     def isLeftSkewed(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is left skewed.  
-        Returns True if the binary tree, self, is left skewed and False otherwise.  A binary tree is left skewed
-        if every node has exactly one child and every node does not have right children.
+        Takes as input self, then returns a boolean value denoting
+        if the binary tree, self, is left skewed.  Returns True if
+        the binary tree, self, is left skewed and False otherwise.
+        A binary tree is left skewed if every node has exactly one
+        child and every node does not have right children.
         """
-        
-        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+
+        # Check if the current node is a leaf, i.e.,
+        # both its left and right branches are None.
         if self.left is None and self.right is None:
             return True  # Return True since a leaf has been reached.
 
-        return False if self.right is not None else self.left.isLeftSkewed()  # Return whether a left subtree of self is left skewed and self has no right children. 
+        # Return whether a left subtree of self is
+        # left skewed and self has no right children.
+        return False if self.right is not None else self.left.isLeftSkewed()
 
     def isRightSkewed(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is right skewed.  
-        Returns True if the binary tree, self, is right skewed and False otherwise.  A binary tree is right skewed
-        if every node has exactly one child and every node does not have left children.
+        Takes as input self, then returns a boolean value denoting
+        if the binary tree, self, is right skewed.  Returns True if
+        the binary tree, self, is right skewed and False otherwise.
+        A binary tree is right skewed if every node has exactly one
+        child and every node does not have left children.
         """
-        
-        # Check if the current node is a leaf, i.e., both its left and right branches are None.
-        if self.left is None and self.right is None:
-            return True  # Return True since a leaf has been reached. 
 
-        return False if self.left is not None else self.right.isRightSkewed()  # Return whether a right subtree of self is right skewed and self has no left children. 
+        # Check if the current node is a leaf, i.e.,
+        # both its left and right branches are None.
+        if self.left is None and self.right is None:
+            return True  # Return True since a leaf has been reached.
+
+        # Return whether a right subtree of self is
+        # right skewed and self has no left children.
+        return False if self.left is not None else self.right.isRightSkewed()
 
     def isDegenerate(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is degenerate.  
-        Returns True if the binary tree, self, is degenerate (a.k.a. pathological) and False otherwise.  
-        A binary tree is degenerate or pathological if every node has exactly one child, i.e., the binary tree
+        Takes as input self, then returns a boolean value denoting
+        if the binary tree, self, is degenerate.  Returns True if
+        the binary tree, self, is degenerate (a.k.a. pathological)
+        and False otherwise.  A binary tree is degenerate or pathological
+        if every node has exactly one child, i.e., the binary tree
         degenerates to a linked list.
         """
-        
-        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+
+        # Check if the current node is a leaf, i.e.,
+        # both its left and right branches are None.
         if self.left is None and self.right is None:
             return True  # Return True since a leaf has been reached.
 
         # Check if the binary tree, self, only has one child, a left child.
         if self.left is not None and self.right is None:
-            return self.left.isDegenerate()  # Recurse down the left branch of the binary tree, self.
+
+            # Recurse down the left branch of the binary tree, self.
+            return self.left.isDegenerate()
 
         # Check if the binary tree, self, only has one child, a right child.
         if self.left is None and self.right is not None:
-            return self.right.isDegenerate()  # Recurse down the right branch of the binary tree, self.
 
-        return False  # Return False because the binarr tree, self, has two children.
+            # Recurse down the right branch of the binary tree, self.
+            return self.right.isDegenerate()
+
+        # Return False because the binary
+        # tree, self, has two children.
+        return False
 
     def isBalanced(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is balanced.
-        Returns True if the binary tree, self, is balanced and False otherwise.  A balanced binary tree is
-        a binary tree in which the heights of every left and right subtree can differ by at most 1.
+        Takes as input self, then returns a boolean value denoting if
+        the binary tree, self, is balanced.  Returns True if the binary
+        tree, self, is balanced and False otherwise.  A balanced binary
+        tree is a binary tree in which the heights of every left and right
+        subtree can differ by at most 1.
         """
 
-        # Return whether the absolute difference of the binary tree's left and right subtrees' heights is less 
-        # than one and whether the left and right subtrees of the binary tree, self, are balanced if they exist.
-        return abs((self.left.height() if self.left is not None else 0) - (self.right.height() if self.right is not None else 0)) <= 1 and \
-               (self.left.isBalanced() if self.left is not None else True) and \
-               (self.right.isBalanced() if self.right is not None else True)
+        # Return whether the absolute difference of the binary tree's left
+        # and right subtrees' heights is less than one and whether the left
+        # and right subtrees of the binary tree, self, are balanced if they
+        # exist.
+        leftHeight = (self.left.height() if self.left is not None else 0)
+        rightHeight = (self.right.height() if self.right is not None else 0)
+        difference = abs(leftHeight - rightHeight)
+        leftBalanced = (self.left.isBalanced() if
+                        self.left is not None else True)
+        rightBalanced = (self.right.isBalanced() if
+                         self.right is not None else True)
+        return difference <= 1 and leftBalanced and rightBalanced
 
     def isFull(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is full.
-        Returns True if the binary tree, self, is full and False otherwise.  A full binary tree is a 
-        binary tree if every node has 0 or 2 children.
+        Takes as input self, then returns a boolean value denoting
+        if the binary tree, self, is full.  Returns True if the binary
+        tree, self, is full and False otherwise.  A full binary tree
+        is a binary tree if every node has 0 or 2 children.
         """
 
-        # Check if the current node is a leaf, i.e., both its left and right branches are None.
+        # Check if the current node is a leaf, i.e.,
+        # both its left and right branches are None.
         if self.left is None and self.right is None:
             return True  # Return True since a leaf has been reached.
-        
-        # Check if the current node has two children, i.e., both its left and right branches are not None.
-        if self.left is not None and self.right is not None:
-            return self.left.isFull() and self.right.isFull()  # Return the recursion of the left and right subtrees.
 
-        return False  # Return False since the binary tree, self, has one child.
+        # Check if the current node has two children, i.e.,
+        # both its left and right branches are not None.
+        if self.left is not None and self.right is not None:
+
+            # Return the recursion of the left and right subtrees.
+            return self.left.isFull() and self.right.isFull()
+
+        # Return False since the binary
+        # tree, self, has one child.
+        return False
 
     def level(self, level):
         """
-        Takes as input self and a non-negative integer, then returns a list representing the corresponding level
-        in self.
+        Takes as input self and a non-negative integer, then returns
+        a list representing the corresponding level in self.
         """
         def helper(binaryTree, level):
             """
-            A helper function to help get the level of self.  This function gets the preorder
-            traversal of self, but each node's value is put into a two-tuple pair with its current level.
+            A helper function to help get the level of self.  This
+            function gets the preorder traversal of self, but each
+            node's value is put into a two-tuple pair with its current level.
             """
-            return [(level, binaryTree.data)] + (helper(binaryTree.left, level + 1) if binaryTree.left is not None else [(level + 1, None)]) + (helper(binaryTree.right, level + 1) if binaryTree.right is not None else [(level + 1, None)])
+            left = (helper(binaryTree.left, level + 1) if
+                    binaryTree.left is not None else [(level + 1, None)])
+            right = (helper(binaryTree.right, level + 1) if
+                     binaryTree.right is not None else [(level + 1, None)])
+            return [(level, binaryTree.data)] + left + right
 
-        # Use itertools.groupby to group the preorder traversal obtained from the helper to group each level,
-        # then get the level desired if that level exists.  This is an extremely Pythonic way of
-        # coding this function.  A preorder traversal is arbitrarily used here to simply traverse the binary tree,
-        # but it could be any traversal: preorder, inorder, or postorder
-        return [[pair[1] for pair in list(group)] for _, group in groupby(sorted(helper(self, 0), key=itemgetter(0)), lambda p: p[0])][level] if level < self.height() else []
+        # Use itertools.groupby to group the preorder traversal obtained
+        # from the helper to group each level, then get the level desired
+        # if that level exists.  This is an extremely Pythonic way of coding
+        # this function.  A preorder traversal is arbitrarily used here to
+        # simply traverse the binary tree, but it could be any traversal:
+        # preorder, inorder, or postorder
+        grouped = groupby(sorted(helper(self, 0), key=itemgetter(0)),
+                          lambda p: p[0])
+        levels = [[pair[1] for pair in list(group)] for _, group in grouped]
+        return levels[level] if level < self.height() else []
 
     def isComplete(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is complete.
-        Returns True if the binary tree, self, is complete and False otherwise.  A complete binary tree is
-        a binary tree in which all levels are completely filled except possibly the last level and the last 
-        level has all keys as left as possible.
+        Takes as input self, then returns a boolean value denoting if the
+        binary tree, self, is complete.  Returns True if the binary tree,
+        self, is complete and False otherwise.  A complete binary tree is
+        a binary tree in which all levels are completely filled except possibly
+        the last level and the last level has all keys as left as possible.
         """
-        level, complete = 0, True  # Instantiate two variables: one to keep track of the current level and a boolean keeping track if the binary tree is complete.
+
+        # Instantiate two variables: one to keep track of the current level
+        # and a boolean keeping track if the binary tree is complete.
+        level, complete = 0, True
 
         # Loop until the call to level yields an empty list, [].
         while (values := self.level(level)) != []:
 
             # Check if None is in values.
             if None in values:
-                found = False  # Instantiate a boolean to see if a None has been found in the list, values.
+
+                # Instantiate a boolean to see if a None
+                # has been found in the list, values.
+                found = False
 
                 # Loop for each value in values.
                 for value in values:
@@ -424,32 +491,35 @@ class BinaryTree:
                     if value is None:
                         found = True  # Set the boolean, found, to True.
 
-                    # Check to see if a None has been found and a non None value is after it, i.e., the binary tree is incomplete.
+                    # Check to see if a None has been found and a non None
+                    # value is after it, i.e., the binary tree is incomplete.
                     if found and value is not None:
                         complete = False  # Set complete to False.
-        
+
             level += 1  # Increment the level.
 
-        return complete  # Return a boolean denoting whether the binary tree, self is complete.
+        # Return a boolean denoting whether
+        # the binary tree, self is complete.
+        return complete
 
     def isPerfect(self):
         """
         Takes as input self, then returns a boolean value denoting if the binary tree, self, is perfect.
-        Returns True if the binary tree, self, is perfect and False otherwise.  A perfect binary tree is 
+        Returns True if the binary tree, self, is perfect and False otherwise.  A perfect binary tree is
         a binary tree in which all internal nodes have two children and all leaves are at same level.
         """
         return self.numberOfNodes() == 2 ** self.height() - 1  # Check if the number of nodes equals 2 ^ (height) - 1, i.e., the binary tree, self, is perfect.
 
     def isBinarySearchTree(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is a binary 
+        Takes as input self, then returns a boolean value denoting if the binary tree, self, is a binary
         search tree.  Returns True if the binary tree, self, is a binary search tree and False otherwise.
-        A binary search tree is a binary tree that fulfills the following invariant: every left nodes' value
-        and its childrens' values are less than its parent's value and every right nodes' value and its 
+        A binary search tree is a binary tree that fulfills the following invariant: every left node's value
+        and its childrens' values are less than its parent's value and every right node's value and its
         childrens' values are greater than its parent's value.
         """
 
-        # Check if the binary search tree invariant is upheld and recurse to see if the children of self are 
+        # Check if the binary search tree invariant is upheld and recurse to see if the children of self are
         # also binary search trees.
         return (all([node < self.data for node in self.left.preOrder()]) if self.left is not None else True) and \
                (all([self.data < node for node in self.right.preOrder()]) if self.right is not None else True) and \
@@ -463,7 +533,7 @@ class BinaryTree:
         should be  left at its default value.
         """
 
-        # Print the data stored in self, then initialize a variable, spacing, to hold the whitespace needed 
+        # Print the data stored in self, then initialize a variable, spacing, to hold the whitespace needed
         # to format the string, then recurse to print the left and right binary subtrees.
         return str(self.data) + (spacing := "\n" + (level + 1) * "  ") + (self.left.binaryTreeString(level + 1) if self.left is not None else "None") + spacing + (self.right.binaryTreeString(level + 1) if self.right is not None else "None")
 
@@ -473,16 +543,17 @@ class BinaryTree:
         the same binary tree and return False otherwise.
         """
 
-        # Check if obj is a BinaryTree and if they have the same preorder traversal, i.e., 
+        # Check if obj is a BinaryTree and if they have the same preorder traversal, i.e.,
         # they represent the same binary tree.   A preorder traversal is arbitrarily used
         # here, but it could be any traversal: preorder, inorder, or postorder
-        return isinstance(obj, BinaryTree) and self.preOrder() == obj.preOrder() 
+        return isinstance(obj, BinaryTree) and self.preOrder() == obj.preOrder()
+
 
 class BinarySearchTree(BinaryTree):
     """
     A class to represent a binary search tree and functions that can be applied to them.  This class is a child
-    of the binary tree class, BinaryTree, above.  A binary search tree is a binary tree that fulfills the 
-    following invariant: every left nodes' value and its childrens' values are less than its parent's value 
+    of the binary tree class, BinaryTree, above.  A binary search tree is a binary tree that fulfills the
+    following invariant: every left nodes' value and its childrens' values are less than its parent's value
     and every right nodes' value and its childrens' values are greater than its parent's value.
     """
 
@@ -502,10 +573,10 @@ class BinarySearchTree(BinaryTree):
         if the value is already inside the binary search tree, no value
         is added and False is returned.
         """
-        
+
         # Check if the data is less than self's data.
         if data < self.data:
-            
+
             # Check if the left subtree of self is empty.
             if self.left is None:
                 self.left = BinarySearchTree(data)  # Add a new subtree with the value data.
@@ -515,20 +586,20 @@ class BinarySearchTree(BinaryTree):
 
         # Check if the data is greater than self's data.
         if self.data < data:
-            
+
             # Check if the rigth subtree of self is empty.
             if self.right is None:
                 self.right = BinarySearchTree(data)  # Add a new subtree with the value data.
                 return True  # Return True since the value was added succesfully.
-                
-            return self.right.insert(data) # Recurse down the right branch of the tree to add data to the binary search tree, self.
+
+            return self.right.insert(data)  # Recurse down the right branch of the tree to add data to the binary search tree, self.
 
         return False  # Return False since data and self's data are equal.
 
     def delete(self, data):
         """
-        Takes as input self and an integer, data, then deletes data to the binary search tree, self, maintaining the 
-        binary search tree invariant; if the value data is inside the binary search tree, self, then it is 
+        Takes as input self and an integer, data, then deletes data to the binary search tree, self, maintaining the
+        binary search tree invariant; if the value data is inside the binary search tree, self, then it is
         deleted and True is returned; if the value is not inside the binary search tree, no value is deleted and
         False is returned.
         """
@@ -537,7 +608,7 @@ class BinarySearchTree(BinaryTree):
             """
             A helper function to aid in the deletion of data.  Takes in the same variables as the outer function
             and additionally two other variables: parent, the parent node of self and left, a boolean denoting
-            if the child of parent, self, is the left child of parent.  If the value data is inside the binary 
+            if the child of parent, self, is the left child of parent.  If the value data is inside the binary
             search tree, self, then it is deleted and True is returned; if the value is not inside the binary
             search tree, no value is deleted and False is returned.
             """
@@ -545,7 +616,7 @@ class BinarySearchTree(BinaryTree):
             # Check if the data of self is the
             # data that needs to be deleted.
             if self.data == data:
-                
+
                 # Check if self has two children
                 if self.left is not None and self.right is not None:
                     self.data = min(self.right.preOrder())  # Set self's data to the smallest value in the right subtree of self (alternatively, this could have been the largest value in the left subtree).
@@ -553,21 +624,27 @@ class BinarySearchTree(BinaryTree):
 
                 # Check if self is a leaf.
                 if self.left is None and self.right is None:
-                    if left: parent.left = None  # Set the left child of parent to None if left is True.
-                    else: parent.right = None  # Set the right child of parent to None if left is False.
+                    if left:
+                        parent.left = None  # Set the left child of parent to None if left is True.
+                    else:
+                        parent.right = None  # Set the right child of parent to None if left is False.
 
                 # Check if self has no right child and a has a left child.
                 elif self.left is not None and self.right is None:
-                    if left: parent.left = self.left  # Set the left child of parent to the left child of self if left is True.
-                    else: parent.right = self.left  # Set the right child of parent to the left child of self if left is False.
-                
+                    if left:
+                        parent.left = self.left  # Set the left child of parent to the left child of self if left is True.
+                    else:
+                        parent.right = self.left  # Set the right child of parent to the left child of self if left is False.
+
                 # Else, self has no left child and a has a right child.
                 else:
-                    if left: parent.left = self.right  # set the left child of parent to the right child of self if left is True.
-                    else: parent.right = self.right  # set the right child of parent to the right child of self if left is False.
+                    if left:
+                        parent.left = self.right  # set the left child of parent to the right child of self if left is True.
+                    else:
+                        parent.right = self.right  # set the right child of parent to the right child of self if left is False.
 
                 return True  # Return True since a value has been deleted successfully.
-            
+
             # Check if data is in the left subtree of self.
             elif self.left is not None and self.left.search(data):
                 return helper(self.left, data, self, True)  # Recurse using the helper into the left subtree.
@@ -575,7 +652,7 @@ class BinarySearchTree(BinaryTree):
             # Check if data is in the right subtree of self.
             elif self.right is not None and self.right.search(data):
                 return helper(self.right, data, self, False)  # Recurse using the helper into the right subtree.
-            
+
             return False  # Return False since data is not conatained in self.
 
         return helper(self, data, None, None)  # Call the helper function to execute the work and return its result.
