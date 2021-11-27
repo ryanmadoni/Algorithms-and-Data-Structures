@@ -455,7 +455,7 @@ class BinaryTree:
         # if that level exists.  This is an extremely Pythonic way of coding
         # this function.  A preorder traversal is arbitrarily used here to
         # simply traverse the binary tree, but it could be any traversal:
-        # preorder, inorder, or postorder
+        # preorder, inorder, or postorder.
         grouped = groupby(sorted(helper(self, 0), key=itemgetter(0)),
                           lambda p: p[0])
         levels = [[pair[1] for pair in list(group)] for _, group in grouped]
@@ -504,65 +504,92 @@ class BinaryTree:
 
     def isPerfect(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is perfect.
-        Returns True if the binary tree, self, is perfect and False otherwise.  A perfect binary tree is
-        a binary tree in which all internal nodes have two children and all leaves are at same level.
+        Takes as input self, then returns a boolean value denoting
+        if the binary tree, self, is perfect.  Returns True if the
+        binary tree, self, is perfect and False otherwise.  A perfect
+        binary tree is a binary tree in which all internal nodes have
+        two children and all leaves are at same level.
         """
-        return self.numberOfNodes() == 2 ** self.height() - 1  # Check if the number of nodes equals 2 ^ (height) - 1, i.e., the binary tree, self, is perfect.
+
+        # Check if the number of nodes equals 2 ^ (height) - 1, i.e.,
+        # the binary tree, self, is perfect.
+        return self.numberOfNodes() == 2 ** self.height() - 1
 
     def isBinarySearchTree(self):
         """
-        Takes as input self, then returns a boolean value denoting if the binary tree, self, is a binary
-        search tree.  Returns True if the binary tree, self, is a binary search tree and False otherwise.
-        A binary search tree is a binary tree that fulfills the following invariant: every left node's value
-        and its childrens' values are less than its parent's value and every right node's value and its
-        childrens' values are greater than its parent's value.
+        Takes as input self, then returns a boolean value denoting if
+        the binary tree, self, is a binary search tree.  Returns True
+        if the binary tree, self, is a binary search tree and False
+        otherwise.  A binary search tree is a binary tree that fulfills
+        the following invariant: every left node's value and its childrens'
+        values are less than its parent's value and every right node's value
+        and its childrens' values are greater than its parent's value.
         """
 
-        # Check if the binary search tree invariant is upheld and recurse to see if the children of self are
-        # also binary search trees.
-        return (all([node < self.data for node in self.left.preOrder()]) if self.left is not None else True) and \
-               (all([self.data < node for node in self.right.preOrder()]) if self.right is not None else True) and \
-               (self.left.isBinarySearchTree() if self.left is not None else True) and \
-               (self.right.isBinarySearchTree() if self.right is not None else True)
+        # Check if the binary search tree invariant is upheld and recurse
+        # to see if the children of self are also binary search trees.
+        leftOrder = (all([node < self.data for node in self.left.preOrder()])
+                     if self.left is not None else True)
+        rightOrder = (all([self.data < node for node in self.right.preOrder()])
+                      if self.right is not None else True)
+        leftSearch = (self.left.isBinarySearchTree() if
+                      self.left is not None else True)
+        rightSearch = (self.right.isBinarySearchTree() if
+                       self.right is not None else True)
+        return leftOrder and rightOrder and leftSearch and rightSearch
 
     def binaryTreeString(self, level=0):
         """
-        A function that takes as input a default value, level, that is used to space the string representation
-        of the binary tree stored in self.  the variable level should not be used by the used by the caller and
-        should be  left at its default value.
+        A function that takes as input a default value, level, that is
+        used to space the string representation of the binary tree stored
+        in self.  the variable level should not be used by the used by the
+        caller and should be  left at its default value.
         """
 
-        # Print the data stored in self, then initialize a variable, spacing, to hold the whitespace needed
-        # to format the string, then recurse to print the left and right binary subtrees.
-        return str(self.data) + (spacing := "\n" + (level + 1) * "  ") + (self.left.binaryTreeString(level + 1) if self.left is not None else "None") + spacing + (self.right.binaryTreeString(level + 1) if self.right is not None else "None")
+        # Print the data stored in self, then initialize a variable,
+        # spacing, to hold the whitespace needed to format the string,
+        # then recurse to print the left and right binary subtrees.
+        spacing = "\n" + (level + 1) * "  "
+        left = (self.left.binaryTreeString(level + 1) if
+                self.left is not None else "None")
+        right = (self.right.binaryTreeString(level + 1) if
+                 self.right is not None else "None")
+        return str(self.data) + spacing + left + spacing + right
 
     def __eq__(self, obj):
         """
-        An overriden version of the object's equal method.  This function returns True if self and obj represent
-        the same binary tree and return False otherwise.
+        An overriden version of the object's equal method.  This
+        function returns True if self and obj represent the same
+        binary tree and return False otherwise.
         """
 
-        # Check if obj is a BinaryTree and if they have the same preorder traversal, i.e.,
-        # they represent the same binary tree.   A preorder traversal is arbitrarily used
-        # here, but it could be any traversal: preorder, inorder, or postorder
-        return isinstance(obj, BinaryTree) and self.preOrder() == obj.preOrder()
+        # Check if obj is a BinaryTree and if they have the same preorder
+        # traversal, i.e., they represent the same binary tree.   A preorder
+        # traversal is arbitrarily used here, but it could be any traversal:
+        # preorder, inorder, or postorder.
+        preorder = self.preOrder() == obj.preOrder()
+        return isinstance(obj, BinaryTree) and preorder
 
 
 class BinarySearchTree(BinaryTree):
     """
-    A class to represent a binary search tree and functions that can be applied to them.  This class is a child
-    of the binary tree class, BinaryTree, above.  A binary search tree is a binary tree that fulfills the
-    following invariant: every left nodes' value and its childrens' values are less than its parent's value
-    and every right nodes' value and its childrens' values are greater than its parent's value.
+    A class to represent a binary search tree and functions that can
+    be applied to them.  This class is a child of the binary tree class,
+    BinaryTree, above.  A binary search tree is a binary tree that
+    fulfills the following invariant: every left nodes' value and its
+    childrens' values are less than its parent's value and every right
+    nodes' value and its childrens' values are greater than its parent's value.
     """
 
     def __init__(self, data):
         """
-        The constructor for the BinarySearchTree class that represents a binary search tree.  Initializes the
-        root data to data.
+        The constructor for the BinarySearchTree class that represents
+        a binary search tree.  Initializes the root data to data.
         """
-        super().__init__(data)  # Call to super, i.e., parent's constructor, to initialize the root node to data.
+
+        # Call to super, i.e., parent's constructor,
+        # to initialize the root node to data.
+        super().__init__(data)
 
     def insert(self, data):
         """
@@ -579,38 +606,51 @@ class BinarySearchTree(BinaryTree):
 
             # Check if the left subtree of self is empty.
             if self.left is None:
-                self.left = BinarySearchTree(data)  # Add a new subtree with the value data.
-                return True  # Return True since the value was added succesfully.
 
-            return self.left.insert(data)  # Recurse down the left branch of the tree to add data to the binary search tree, self.
+                # Add a new subtree with the value data.
+                # Return True since the value was added succesfully.
+                self.left = BinarySearchTree(data)
+                return True
+
+            # Recurse down the left branch of the tree to
+            # add data to the binary search tree, self.
+            return self.left.insert(data)
 
         # Check if the data is greater than self's data.
         if self.data < data:
 
             # Check if the rigth subtree of self is empty.
             if self.right is None:
-                self.right = BinarySearchTree(data)  # Add a new subtree with the value data.
-                return True  # Return True since the value was added succesfully.
 
-            return self.right.insert(data)  # Recurse down the right branch of the tree to add data to the binary search tree, self.
+                # Add a new subtree with the value data.
+                # Return True since the value was added succesfully.
+                self.right = BinarySearchTree(data)
+                return True
+
+            # Recurse down the right branch of the tree to
+            # add data to the binary search tree, self.
+            return self.right.insert(data)
 
         return False  # Return False since data and self's data are equal.
 
     def delete(self, data):
         """
-        Takes as input self and an integer, data, then deletes data to the binary search tree, self, maintaining the
-        binary search tree invariant; if the value data is inside the binary search tree, self, then it is
-        deleted and True is returned; if the value is not inside the binary search tree, no value is deleted and
-        False is returned.
+        Takes as input self and an integer, data, then deletes data to
+        the binary search tree, self, maintaining the binary search tree
+        invariant; if the value data is inside the binary search tree, self,
+        then it is deleted and True is returned; if the value is not inside
+        the binary search tree, no value is deleted and False is returned.
         """
 
         def helper(self, data, parent, left):
             """
-            A helper function to aid in the deletion of data.  Takes in the same variables as the outer function
-            and additionally two other variables: parent, the parent node of self and left, a boolean denoting
-            if the child of parent, self, is the left child of parent.  If the value data is inside the binary
-            search tree, self, then it is deleted and True is returned; if the value is not inside the binary
-            search tree, no value is deleted and False is returned.
+            A helper function to aid in the deletion of data.  Takes in the
+            same variables as the outer function and additionally two other
+            variables: parent, the parent node of self and left, a boolean
+            denoting if the child of parent, self, is the left child of parent.
+            If the value data is inside the binary search tree, self, then it
+            is deleted and True is returned; if the value is not inside the
+            binary search tree, no value is deleted and False is returned.
             """
 
             # Check if the data of self is the
@@ -619,43 +659,76 @@ class BinarySearchTree(BinaryTree):
 
                 # Check if self has two children
                 if self.left is not None and self.right is not None:
-                    self.data = min(self.right.preOrder())  # Set self's data to the smallest value in the right subtree of self (alternatively, this could have been the largest value in the left subtree).
-                    return helper(self.right, self.data, self, False)  # Recurse to delete self.data in the right subtree to remove the duplicate value.
+
+                    # Set self's data to the smallest value in the right
+                    # subtree of self (alternatively, this could have been
+                    # the largest value in the left subtree).
+                    self.data = min(self.right.preOrder())
+
+                    # Recurse to delete self.data in the right
+                    # subtree to remove the duplicate value.
+                    return helper(self.right, self.data, self, False)
 
                 # Check if self is a leaf.
                 if self.left is None and self.right is None:
                     if left:
-                        parent.left = None  # Set the left child of parent to None if left is True.
+
+                        # Set the left child of parent
+                        # to None if left is True.
+                        parent.left = None
                     else:
-                        parent.right = None  # Set the right child of parent to None if left is False.
+
+                        # Set the right child of parent
+                        # to None if left is False.
+                        parent.right = None
 
                 # Check if self has no right child and a has a left child.
                 elif self.left is not None and self.right is None:
                     if left:
-                        parent.left = self.left  # Set the left child of parent to the left child of self if left is True.
+
+                        # Set the left child of parent to the
+                        # left child of self if left is True.
+                        parent.left = self.left
                     else:
-                        parent.right = self.left  # Set the right child of parent to the left child of self if left is False.
+
+                        # Set the right child of parent to the
+                        # left child of self if left is False.
+                        parent.right = self.left
 
                 # Else, self has no left child and a has a right child.
                 else:
                     if left:
-                        parent.left = self.right  # set the left child of parent to the right child of self if left is True.
-                    else:
-                        parent.right = self.right  # set the right child of parent to the right child of self if left is False.
 
-                return True  # Return True since a value has been deleted successfully.
+                        # set the left child of parent to the
+                        # right child of self if left is True.
+                        parent.left = self.right
+                    else:
+
+                        # set the right child of parent to the
+                        # right child of self if left is False.
+                        parent.right = self.right
+
+                # Return True since a value has
+                # been deleted successfully.
+                return True
 
             # Check if data is in the left subtree of self.
             elif self.left is not None and self.left.search(data):
-                return helper(self.left, data, self, True)  # Recurse using the helper into the left subtree.
+
+                # Recurse using the helper into the left subtree.
+                return helper(self.left, data, self, True)
 
             # Check if data is in the right subtree of self.
             elif self.right is not None and self.right.search(data):
-                return helper(self.right, data, self, False)  # Recurse using the helper into the right subtree.
+
+                # Recurse using the helper into the right subtree.
+                return helper(self.right, data, self, False)
 
             return False  # Return False since data is not conatained in self.
 
-        return helper(self, data, None, None)  # Call the helper function to execute the work and return its result.
+        # Call the helper function to execute
+        # the work and return its result.
+        return helper(self, data, None, None)
 
     def search(self, data):
         """
